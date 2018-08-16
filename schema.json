@@ -1,0 +1,346 @@
+{
+	"items": {
+		"_id": {
+			"type": "Object",
+			"structure": {
+				"_bsontype": {
+					"type": "string",
+					"required": true
+				},
+				"id": {
+					"type": "Uint8Array",
+					"required": true
+				},
+				"toHexString": {
+					"type": "function",
+					"required": true
+				},
+				"get_inc": {
+					"type": "function",
+					"required": true
+				},
+				"getInc": {
+					"type": "function",
+					"required": true
+				},
+				"generate": {
+					"type": "function",
+					"required": true
+				},
+				"toJSON": {
+					"type": "function",
+					"required": true
+				},
+				"equals": {
+					"type": "function",
+					"required": true
+				},
+				"getTimestamp": {
+					"type": "function",
+					"required": true
+				},
+				"generationTime": {
+					"type": "number",
+					"required": true
+				}
+			},
+			"required": true
+		},
+		"item_id": {
+			"type": "number",
+			"required": true
+		},
+		"item_name": {
+			"type": "string",
+			"required": true
+		},
+		"item_description": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"users": {
+		"_id": {
+			"type": "Object",
+			"structure": {
+				"_bsontype": {
+					"type": "string",
+					"required": true
+				},
+				"id": {
+					"type": "Uint8Array",
+					"required": true
+				},
+				"toHexString": {
+					"type": "function",
+					"required": true
+				},
+				"get_inc": {
+					"type": "function",
+					"required": true
+				},
+				"getInc": {
+					"type": "function",
+					"required": true
+				},
+				"generate": {
+					"type": "function",
+					"required": true
+				},
+				"toJSON": {
+					"type": "function",
+					"required": true
+				},
+				"equals": {
+					"type": "function",
+					"required": true
+				},
+				"getTimestamp": {
+					"type": "function",
+					"required": true
+				},
+				"generationTime": {
+					"type": "number",
+					"required": true
+				}
+			},
+			"required": true
+		},
+		"user_id": {
+			"type": "number",
+			"required": true
+		},
+		"name": {
+			"type": "string",
+			"required": true
+		},
+		"email": {
+			"type": "string",
+			"required": true
+		},
+		"password": {
+			"type": "string",
+			"required": true
+		},
+		"type_id": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"users_types": {
+		"_id": {
+			"type": "Object",
+			"structure": {
+				"_bsontype": {
+					"type": "string",
+					"required": true
+				},
+				"id": {
+					"type": "Uint8Array",
+					"required": true
+				},
+				"toHexString": {
+					"type": "function",
+					"required": true
+				},
+				"get_inc": {
+					"type": "function",
+					"required": true
+				},
+				"getInc": {
+					"type": "function",
+					"required": true
+				},
+				"generate": {
+					"type": "function",
+					"required": true
+				},
+				"toJSON": {
+					"type": "function",
+					"required": true
+				},
+				"equals": {
+					"type": "function",
+					"required": true
+				},
+				"getTimestamp": {
+					"type": "function",
+					"required": true
+				},
+				"generationTime": {
+					"type": "number",
+					"required": true
+				}
+			},
+			"required": true
+		},
+		"type_id": {
+			"type": "number",
+			"required": true
+		},
+		"type_name": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"invoices": {
+		"_id": {
+			"type": "Object",
+			"structure": {
+				"_bsontype": {
+					"type": "string",
+					"required": true
+				},
+				"id": {
+					"type": "Uint8Array",
+					"required": true
+				},
+				"toHexString": {
+					"type": "function",
+					"required": true
+				},
+				"get_inc": {
+					"type": "function",
+					"required": true
+				},
+				"getInc": {
+					"type": "function",
+					"required": true
+				},
+				"generate": {
+					"type": "function",
+					"required": true
+				},
+				"toJSON": {
+					"type": "function",
+					"required": true
+				},
+				"equals": {
+					"type": "function",
+					"required": true
+				},
+				"getTimestamp": {
+					"type": "function",
+					"required": true
+				},
+				"generationTime": {
+					"type": "number",
+					"required": true
+				}
+			},
+			"required": true
+		},
+		"id": {
+			"type": "number",
+			"required": true
+		},
+		"name": {
+			"type": "string",
+			"required": true
+		},
+		"type_id": {
+			"type": "number",
+			"required": true
+		},
+		"data_from": {
+			"type": "string",
+			"required": true
+		},
+		"data_to": {
+			"type": "string",
+			"required": true
+		},
+		"price": {
+			"type": "number",
+			"required": true
+		},
+		"vat_percentage": {
+			"type": "string",
+			"required": true
+		},
+		"company_name": {
+			"type": "string",
+			"required": true
+		},
+		"client_name": {
+			"type": "string",
+			"required": true
+		},
+		"client_phone": {
+			"type": "string",
+			"required": true
+		},
+		"po_number": {
+			"type": "string",
+			"required": true
+		},
+		"accountant_lock": {
+			"type": "boolean",
+			"required": true
+		},
+		"account_manager_lock": {
+			"type": "boolean",
+			"required": true
+		},
+		"items": {
+			"type": "Array",
+			"required": true
+		}
+	},
+	"products_types": {
+		"_id": {
+			"type": "Object",
+			"structure": {
+				"_bsontype": {
+					"type": "string",
+					"required": true
+				},
+				"id": {
+					"type": "Uint8Array",
+					"required": true
+				},
+				"toHexString": {
+					"type": "function",
+					"required": true
+				},
+				"get_inc": {
+					"type": "function",
+					"required": true
+				},
+				"getInc": {
+					"type": "function",
+					"required": true
+				},
+				"generate": {
+					"type": "function",
+					"required": true
+				},
+				"toJSON": {
+					"type": "function",
+					"required": true
+				},
+				"equals": {
+					"type": "function",
+					"required": true
+				},
+				"getTimestamp": {
+					"type": "function",
+					"required": true
+				},
+				"generationTime": {
+					"type": "number",
+					"required": true
+				}
+			},
+			"required": true
+		},
+		"type_id": {
+			"type": "number",
+			"required": true
+		},
+		"type_name": {
+			"type": "string",
+			"required": true
+		}
+	}
+}
