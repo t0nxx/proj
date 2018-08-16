@@ -15,6 +15,11 @@ const ProductTypeRoute = require('./routes/prodtypes');
 
 app.use(express.json());
 app.use('/items', ItemsRoute ) ;
+app.use('/invoices', InvoicesRoute ) ;
+app.use('/user', UsersRoute ) ;
+app.use('/userstypes', UsersTypeRoute ) ;
+app.use('/prodtypes', ProductTypeRoute ) ;
+
 
 
 
