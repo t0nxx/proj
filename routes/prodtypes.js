@@ -25,6 +25,7 @@ router.post('/', async (req, res) => {
     });
     try {
         await product.save();
+        res.json("added");
     } catch (error) {
         res.send(error.message);
     }

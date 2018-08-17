@@ -3,10 +3,29 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const users_schema = new mongoose.Schema({
     user_id: Number,
-    name: String,
-    email: String,
-    password: String,
-    utype_id: String
+    name: {
+        type: String ,
+        minlength : 3 ,
+        maxlength : 50 ,
+        required : true
+    },
+    email: {
+        type: String,
+        minlength: 5,
+        maxlength: 255,
+        required: true ,
+        unique : true
+    },
+    password: {
+        type: String,
+        minlength: 5,
+        maxlength: 1024,
+        required: true ,
+    },
+    utype_id: {
+        type: String,
+        required: true
+    }
 });
 
 const Users = mongoose.model('Users', users_schema);
