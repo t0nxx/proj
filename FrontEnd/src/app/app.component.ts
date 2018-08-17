@@ -1,0 +1,25 @@
+import { Component } from '@angular/core';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  constructor(
+    private af: AngularFireAuth,
+    private router: Router
+  ) {
+
+    // this.af.authState.subscribe(auth => {
+    //   console.log(auth)
+    //   if (!auth) {
+    //     this.router.navigateByUrl('/login');
+    //   }
+    // })
+    // console.log(this.af.auth.currentUser)
+
+  }
+}

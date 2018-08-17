@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~primeicons/primeicons.css';
+@import '~primeng/resources/themes/omega/theme.css';
+@import '~primeng/resources/primeng.min.css';
+@import '~bootstrap3/dist/css/bootstrap.min.css';
+@import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+
+.btn-primary,
+.btn-primary:hover {
+    color: #fff;
+    background-color: #c24891;
+    border-color: #c24891;
+}
+
+:host ::ng-deep button {
+    margin-right: .25em;
+}
+
+:host ::ng-deep .ui-message,
+:host ::ng-deep .ui-inputtext {
+    margin-right: .25em;
+}
