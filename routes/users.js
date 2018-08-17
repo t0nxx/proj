@@ -14,14 +14,14 @@ router.get('/', Auth , async (req, res) => {
     res.send(result);
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', Auth , async (req, res) => {
     const query = { user_id: req.params.id };
     const result = await Users
         .find(query);
     res.send(result);
 })
 
-router.post('/', async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const user = new Users({
         name: req.body.name,
         email: req.body.email,
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
     const query = { user_id: req.params.id }
     try {
@@ -53,7 +53,7 @@ router.put('/:id', async (req, res) => {
 })
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', Auth,async (req, res) => {
     const query = { user_id: req.params.id };
     try {
         await Users.remove(query);
