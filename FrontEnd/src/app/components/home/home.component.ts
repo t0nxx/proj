@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   constructor(
     mess: NotificationsServices
   ) {
-    this.msgs = mess.showSuccess();
+    // this.msgs = mess.showSuccess();
   }
 
   ngOnInit() {

@@ -1,10 +1,10 @@
+import { MainServices } from './services/main.services';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AuthGuard } from './services/auth.services';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { Config } from '../config/config';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -13,9 +13,6 @@ import {GrowlModule} from 'primeng/growl';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -33,6 +30,7 @@ import { AddItemComponent } from './components/add-item/add-item.component';
 import { AddItemsTypeComponent } from './components/add-items-type/add-items-type.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import { NotificationsServices } from './services/notifications.services';
 
 
 @NgModule({
@@ -64,13 +62,11 @@ import { NotificationsComponent } from './components/notifications/notifications
       { path: "usersTypes", component: UsersTypesComponent, canActivate: [AuthGuard]},
       { path: "addUsersType", component: AddUsersTypeComponent, canActivate: [AuthGuard]},
       { path: "items", component: ItemsComponent, canActivate: [AuthGuard]},
+      { path: "updateItem/:id", component: AddItemComponent, canActivate: [AuthGuard]},
       { path: "addItem", component: AddItemComponent, canActivate: [AuthGuard]},
       { path: "types", component: TypesComponent, canActivate: [AuthGuard]},
       { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]}
     ]),
-    AngularFireModule.initializeApp(Config),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule,
     HttpModule,
     HttpClientModule,
     GrowlModule,
@@ -79,7 +75,9 @@ import { NotificationsComponent } from './components/notifications/notifications
   ],
   providers: [
     AuthGuard,
-    MessageService
+    MessageService,
+    NotificationsServices,
+    MainServices
   ],
   bootstrap: [AppComponent]
 })

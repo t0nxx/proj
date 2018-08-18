@@ -10,27 +10,13 @@ export class NotificationsServices {
 
     constructor(private messageService: MessageService) { }
 
-    showSuccess() {
+    // success - info - warn - error - 
+
+    showSuccess(mess, desc, severity) {
         this.msgs = [];
-        this.msgs.push({ severity: 'success', summary: 'Success Message', detail: 'Order submitted' });
+        this.msgs.push({ severity: severity, summary: mess, detail: desc });
         return this.msgs;
     }
-
-    showInfo() {
-        this.msgs = [];
-        this.msgs.push({ severity: 'info', summary: 'Info Message', detail: 'PrimeNG rocks' });
-    }
-
-    showWarn() {
-        this.msgs = [];
-        this.msgs.push({ severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
-    }
-
-    showError() {
-        this.msgs = [];
-        this.msgs.push({ severity: 'error', summary: 'Error Message', detail: 'Validation failed' });
-    }
-
     showMultiple() {
         this.msgs = [];
         this.msgs.push({ severity: 'info', summary: 'Message 1', detail: 'PrimeNG rocks' });

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,21 +9,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private af: AngularFireAuth,
     private router: Router
   ) { }
 
   logOut() {
-    this.af.authState.subscribe(state => {
-      console.log(state)
-    });
-    this.af.auth.signOut().then(function () {
-      localStorage.removeItem('currentUser');
-      console.log("sign out");
-      this.router.navigateByUrl('/login');
-    }.bind(this), function (err) {
-      console.log(err);
-    });
+    localStorage.removeItem('currentUser');
+    console.log("sign out");
+    this.router.navigateByUrl('/login');
   }
 
   ngOnInit() {

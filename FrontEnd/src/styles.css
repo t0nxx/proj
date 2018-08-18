@@ -21,3 +21,25 @@
 :host ::ng-deep .ui-inputtext {
     margin-right: .25em;
 }
+
+.panel-primary>.panel-heading {
+    background-color: #cb73a8;
+    border-color: #cb73a8;
+}
+
+.panel-primary {
+    border-color: #cb73a8;
+}
+
+td.actions a {
+    height: 30px;
+    width: 30px;
+    background: #cb73a8;
+    display: inline-block;
+    padding: 1px 0;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: white;
+    font-size: 20px;
+}
