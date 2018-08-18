@@ -1,7 +1,6 @@
 // import { Items } from './../../interfaces/items';
 import { MainServices } from './../../services/main.services';
-import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/components/common/api';
+import { Component, OnInit } from '@angular/core';import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
