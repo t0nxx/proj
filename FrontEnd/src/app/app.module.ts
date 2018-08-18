@@ -56,7 +56,7 @@ import { NotificationsServices } from './services/notifications.services';
     BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, canActivate: [AuthGuard]},
-      { path: "login", component: LoginComponent},
+      { path: "login", component: LoginComponent, canActivate: [AuthGuard]},
       { path: "users", component: UsersComponent, canActivate: [AuthGuard]},
       { path: "addUser", component: AdduserComponent, canActivate: [AuthGuard]},
       { path: "usersTypes", component: UsersTypesComponent, canActivate: [AuthGuard]},
