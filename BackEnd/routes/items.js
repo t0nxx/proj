@@ -40,8 +40,9 @@ router.post('/add', Auth,async (req,res) =>{
 
 router.put('/update', Auth,async (req,res) =>{
     const updated = req.body ;
-    const query = { item_id: req.body.item_id }
+    const query = await Items.findOne({ item_id: req.body.item_id });
     try {
+        if (!query) return res.status(400).send('invalid item id');
         await Items.update(query,updated);
         res.send("updated") ;
     } catch (error) {
@@ -52,8 +53,9 @@ router.put('/update', Auth,async (req,res) =>{
 
 
 router.delete('/delete', Auth,async (req,res) =>{
-    const query = { item_id: req.body.item_id };
+    const query = await Items.findOne({ item_id: req.body.item_id });
     try {
+        if (!query) return res.status(400).send('invalid item id');
         await Items.remove(query);
         res.send("removed");
     } catch (error) {
@@ -61,13 +63,6 @@ router.delete('/delete', Auth,async (req,res) =>{
     }
 
 })
-
-
-
-
-
-
-
 
 
 

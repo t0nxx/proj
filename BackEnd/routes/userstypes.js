@@ -34,12 +34,10 @@ router.post('/add', Auth,async (req, res) => {
 })
 
 router.put('/update', Auth,async (req, res) => {
-    const updated = {
-        utype_name: req.body.utype_name,
-        utype_id: req.body.utype_id
-    };
-    const query = { utype_id: updated.utype_id }
+    const updated = req.body ;
+    const query = await Users_types.findOne({ utype_id: updated.utype_id });
     try {
+        if(!query) return res.status(400).send('invaild utype id');
         await Users_types.update(query, updated);
         res.send("updated");
     } catch (error) {
@@ -50,8 +48,9 @@ router.put('/update', Auth,async (req, res) => {
 
 
 router.delete('/delete', Auth,async (req, res) => {
-    const query = { utype_id: req.body.utype_id };
+    const query = await Users_types.findOne({ utype_id: req.body.utype_id });
     try {
+        if (!query) return res.status(400).send('invaild utype id');
         await Users_types.remove(query);
         res.send("removed");
     } catch (error) {
