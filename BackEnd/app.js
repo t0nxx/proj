@@ -30,4 +30,4 @@ app.listen(3000 , () => console.log("running")) ;
 
 
 
-///install mongoose@5.1.7
+/// npm install mongoose@5.1.7
