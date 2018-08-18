@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -48,8 +49,9 @@ router.post('/add', Auth,async (req, res) => {
 
 router.put('/update', Auth,async (req, res) => {
     const updated = req.body;
-    const query = { user_id: req.body.user_id }
+    const query = await Users.findOne({ user_id: updated.user_id });
     try {
+        if(!query) return res.status(400).send('invalid user id');
         await Users.update(query, updated);
         res.send("updated");
     } catch (error) {
@@ -60,8 +62,9 @@ router.put('/update', Auth,async (req, res) => {
 
 
 router.delete('/delete', Auth,async (req, res) => {
-    const query = { user_id: req.body.user_id };
+    const query =await Users.findOne({ user_id: req.body.user_id });
     try {
+        if (!query) return res.status(400).send('invalid user id')
         await Users.remove(query);
         res.send("removed");
     } catch (error) {
@@ -84,15 +87,18 @@ router.post('/login', async (req, res) => {
         const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, {
             expiresIn: "1h"
         });
-         res.send({
+        
+        res.send({
             name : user.name,
             email : user.email,
             utype_id : user.utype_id ,
             token : token
         });
+        
     } catch (error) {
         res.send(error.message);
     }
+    
 })
 
 

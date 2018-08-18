@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
@@ -11,6 +12,12 @@ router.get('/', Auth,async (req, res) => {
     const result = await Invoices
         .find();
     res.send(result);
+})
+
+router.get('/count', Auth, async (req, res) => {
+    const result = await Invoices
+        .count();
+    res.json(result);
 })
 
 router.get('/', Auth,async (req, res) => {
@@ -31,7 +38,7 @@ router.post('/add', Auth,async (req, res) => {
         company_name: req.body.company_name,
         client_name: req.body.client_name,
         client_phone: req.body.client_phone,
-        po_Number: req.body.po_Number,
+        po_number: req.body.po_number,
         accountant_lock: req.body.accountant_lock,
         account_manager_lock: req.body.account_manager_lock,
         items: req.body.items 
@@ -46,8 +53,9 @@ router.post('/add', Auth,async (req, res) => {
 
 router.put('/update', Auth,async (req, res) => {
     const updated = req.body;
-    const query = { inv_id: req.body.inv_id }
+    const query = await Invoices.findOne({ inv_id: req.body.inv_id });
     try {
+        if (!query) return res.status(400).send('invalid inv id');
         await Invoices.update(query, updated);
         res.send("updated");
     } catch (error) {
@@ -58,8 +66,9 @@ router.put('/update', Auth,async (req, res) => {
 
 
 router.delete('/delete', Auth,async (req, res) => {
-    const query = { inv_id: req.body.inv_id };
+    const query = await Invoices.findOne({ inv_id: req.body.inv_id });
     try {
+        if (!query) return res.status(400).send('invalid inv id');
         await Invoices.remove(query);
         res.send("removed");
     } catch (error) {
@@ -67,6 +76,7 @@ router.delete('/delete', Auth,async (req, res) => {
     }
 
 })
+
 
 
 
