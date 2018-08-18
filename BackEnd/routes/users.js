@@ -14,14 +14,14 @@ router.get('/', Auth , async (req, res) => {
     res.send(result);
 })
 
-router.get('/:id', Auth , async (req, res) => {
-    const query = { user_id: req.params.id };
+router.get('/', Auth , async (req, res) => {
+    const query = { user_id: req.body.user_id };
     const result = await Users
         .find(query);
     res.send(result);
 })
 
-router.post('/', Auth,async (req, res) => {
+router.post('/add', Auth,async (req, res) => {
     const user = new Users({
         name: req.body.name,
         email: req.body.email,
@@ -40,9 +40,9 @@ router.post('/', Auth,async (req, res) => {
     }
 })
 
-router.put('/:id', Auth,async (req, res) => {
+router.put('/update', Auth,async (req, res) => {
     const updated = req.body;
-    const query = { user_id: req.params.id }
+    const query = { user_id: req.body.user_id }
     try {
         await Users.update(query, updated);
         res.send("updated");
@@ -53,8 +53,8 @@ router.put('/:id', Auth,async (req, res) => {
 })
 
 
-router.delete('/:id', Auth,async (req, res) => {
-    const query = { user_id: req.params.id };
+router.delete('/delete', Auth,async (req, res) => {
+    const query = { user_id: req.body.user_id };
     try {
         await Users.remove(query);
         res.send("removed");

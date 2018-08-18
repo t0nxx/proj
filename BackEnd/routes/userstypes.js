@@ -12,14 +12,14 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.get('/:id', Auth,async (req, res) => {
-    const query = { utype_id: req.params.id };
+router.get('/', Auth,async (req, res) => {
+    const query = { utype_id: req.body.utype_id };
     const result = await Users_types
         .find(query);
     res.send(result);
 })
 
-router.post('/', Auth,async (req, res) => {
+router.post('/add', Auth,async (req, res) => {
     const users_type = new Users_types({
         utype_name : req.body.utype_name
     });
@@ -31,9 +31,9 @@ router.post('/', Auth,async (req, res) => {
     }
 })
 
-router.put('/:id', Auth,async (req, res) => {
+router.put('/update', Auth,async (req, res) => {
     const updated = req.body;
-    const query = { utype_id: req.params.id }
+    const query = { utype_id: req.body.utype_id }
     try {
         await Users_types.update(query, updated);
         res.send("updated");
@@ -44,8 +44,8 @@ router.put('/:id', Auth,async (req, res) => {
 })
 
 
-router.delete('/:id', Auth,async (req, res) => {
-    const query = { utype_id: req.params.id };
+router.delete('/delete', Auth,async (req, res) => {
+    const query = { utype_id: req.body.utype_id };
     try {
         await Users_types.remove(query);
         res.send("removed");

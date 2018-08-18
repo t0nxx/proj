@@ -14,14 +14,14 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.get('/:id', Auth,async (req, res) => {
-    const query = { ptype_id: req.params.id };
+router.get('/', Auth,async (req, res) => {
+    const query = { ptype_id: req.body.ptype_id };
     const result = await Products_types
         .find(query);
     res.send(result);
 })
 
-router.post('/', Auth,async (req, res) => {
+router.post('/add', Auth,async (req, res) => {
     const product = new Products_types({
         ptype_name: req.body.ptype_name
     });
@@ -33,9 +33,9 @@ router.post('/', Auth,async (req, res) => {
     }
 })
 
-router.put('/:id', Auth,async (req, res) => {
+router.put('/update', Auth,async (req, res) => {
     const updated = req.body;
-    const query = { ptype_id: req.params.id }
+    const query = { ptype_id: req.body.ptype_id }
     try {
         await Products_types.update(query, updated);
         res.send("updated");
@@ -46,8 +46,8 @@ router.put('/:id', Auth,async (req, res) => {
 })
 
 
-router.delete('/:id', Auth,async (req, res) => {
-    const query = { ptype_id: req.params.id };
+router.delete('/delete', Auth,async (req, res) => {
+    const query = { ptype_id: req.body.ptype_id };
     try {
         await Products_types.remove(query);
         res.send("removed");

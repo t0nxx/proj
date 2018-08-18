@@ -13,14 +13,14 @@ router.get('/', Auth,async (req, res) => {
         res.send(result);
 })
 
-router.get('/:id', Auth,async (req, res) => {
-    const query = { item_id: req.params.id };
+router.get('/', Auth,async (req, res) => {
+    const query = { item_id: req.body.item_id };
     const result = await Items
         .find(query);
     res.send(result);
 })
 
-router.post('/', Auth,async (req,res) =>{
+router.post('/add', Auth,async (req,res) =>{
     const item = new Items({
         item_name : req.body.item_name ,
         item_description : req.body.item_description
@@ -33,9 +33,9 @@ router.post('/', Auth,async (req,res) =>{
     }
 })
 
-router.put('/:id', Auth,async (req,res) =>{
+router.put('/update', Auth,async (req,res) =>{
     const updated = req.body ;
-    const query = { item_id: req.params.id }
+    const query = { item_id: req.body.item_id }
     try {
         await Items.update(query,updated);
         res.send("updated") ;
@@ -46,8 +46,8 @@ router.put('/:id', Auth,async (req,res) =>{
 })
 
 
-router.delete('/:id', Auth,async (req,res) =>{
-    const query = { item_id: req.params.id };
+router.delete('/delete', Auth,async (req,res) =>{
+    const query = { item_id: req.body.item_id };
     try {
         await Items.remove(query);
         res.send("removed");
