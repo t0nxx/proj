@@ -33,8 +33,11 @@ router.post('/add', Auth,async (req, res) => {
 })
 
 router.put('/update', Auth,async (req, res) => {
-    const updated = req.body;
-    const query = { utype_id: req.body.utype_id }
+    const updated = {
+        utype_name: req.body.utype_name,
+        utype_id: req.body.utype_id
+    };
+    const query = { utype_id: updated.utype_id }
     try {
         await Users_types.update(query, updated);
         res.send("updated");

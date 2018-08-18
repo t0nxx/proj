@@ -13,6 +13,12 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
+router.get('/count', Auth, async (req, res) => {
+    const result = await Invoices
+        .count();
+    res.json(result);
+})
+
 router.get('/', Auth,async (req, res) => {
     const query = { inv_id: req.body.inv_id };
     const result = await Invoices
