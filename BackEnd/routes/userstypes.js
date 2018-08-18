@@ -21,7 +21,8 @@ router.get('/', Auth,async (req, res) => {
 
 router.post('/add', Auth,async (req, res) => {
     const users_type = new Users_types({
-        utype_name : req.body.utype_name
+        utype_name : req.body.utype_name ,
+        utype_id : req.body.utype_id
     });
     try {
         await users_type.save();
