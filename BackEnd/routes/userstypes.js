@@ -2,22 +2,24 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Users_types = require('../models/userstypes');
+const Auth = require('../middlewars/auth');
 
 
-router.get('/', async (req, res) => {
+
+router.get('/', Auth,async (req, res) => {
     const result = await Users_types
         .find();
     res.send(result);
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', Auth,async (req, res) => {
     const query = { utype_id: req.params.id };
     const result = await Users_types
         .find(query);
     res.send(result);
 })
 
-router.post('/', async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const users_type = new Users_types({
         utype_name : req.body.utype_name
     });
@@ -29,7 +31,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
     const query = { utype_id: req.params.id }
     try {
@@ -42,7 +44,7 @@ router.put('/:id', async (req, res) => {
 })
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', Auth,async (req, res) => {
     const query = { utype_id: req.params.id };
     try {
         await Users_types.remove(query);

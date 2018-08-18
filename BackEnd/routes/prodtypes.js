@@ -2,24 +2,26 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Products_types = require('../models/prodtypes');
+const Auth = require('../middlewars/auth');
 
 
 
 
-router.get('/', async (req, res) => {
+
+router.get('/', Auth,async (req, res) => {
     const result = await Products_types
         .find();
     res.send(result);
 })
 
-router.get('/:id', async (req, res) => {
+router.get('/:id', Auth,async (req, res) => {
     const query = { ptype_id: req.params.id };
     const result = await Products_types
         .find(query);
     res.send(result);
 })
 
-router.post('/', async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const product = new Products_types({
         ptype_name: req.body.ptype_name
     });
@@ -31,7 +33,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
     const query = { ptype_id: req.params.id }
     try {
@@ -44,7 +46,7 @@ router.put('/:id', async (req, res) => {
 })
 
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', Auth,async (req, res) => {
     const query = { ptype_id: req.params.id };
     try {
         await Products_types.remove(query);
