@@ -12,6 +12,12 @@ router.get('/', Auth,async (req, res) => {
         .find();
         res.send(result);
 })
+router.get('/count', Auth, async (req, res) => {
+    const result = await Items
+        .count();
+    res.json(result);
+})
+
 
 router.get('/', Auth,async (req, res) => {
     const query = { item_id: req.body.item_id };
