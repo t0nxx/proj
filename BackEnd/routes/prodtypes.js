@@ -15,8 +15,8 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.get('/', Auth,async (req, res) => {
-    const query = { ptype_id: req.body.ptype_id };
+router.post('/:id', Auth,async (req, res) => {
+    const query = { ptype_id: req.params.id };
     const result = await Products_types
         .find(query);
     res.send(result);
@@ -34,9 +34,9 @@ router.post('/add', Auth,async (req, res) => {
     }
 })
 
-router.put('/update', Auth,async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
-    const query = await Products_types.findOne({ ptype_id: req.body.ptype_id });
+    const query = await Products_types.findOne({ ptype_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid prod id');
         await Products_types.update(query, updated);
@@ -48,8 +48,8 @@ router.put('/update', Auth,async (req, res) => {
 })
 
 
-router.delete('/delete', Auth,async (req, res) => {
-    const query = await Products_types.findOne({ ptype_id: req.body.ptype_id });
+router.delete('/:id', Auth,async (req, res) => {
+    const query = await Products_types.findOne({ ptype_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid prod id');
         await Products_types.remove(query);

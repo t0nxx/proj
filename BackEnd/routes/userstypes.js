@@ -13,8 +13,8 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.get('/', Auth,async (req, res) => {
-    const query = { utype_id: req.body.utype_id };
+router.post('/:id', Auth,async (req, res) => {
+    const query = { utype_id: req.params.id };
     const result = await Users_types
         .find(query);
     res.send(result);
@@ -33,9 +33,9 @@ router.post('/add', Auth,async (req, res) => {
     }
 })
 
-router.put('/update', Auth,async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body ;
-    const query = await Users_types.findOne({ utype_id: updated.utype_id });
+    const query = await Users_types.findOne({ utype_id: req.params.id });
     try {
         if(!query) return res.status(400).send('invaild utype id');
         await Users_types.update(query, updated);
@@ -47,8 +47,8 @@ router.put('/update', Auth,async (req, res) => {
 })
 
 
-router.delete('/delete', Auth,async (req, res) => {
-    const query = await Users_types.findOne({ utype_id: req.body.utype_id });
+router.delete('/:id', Auth,async (req, res) => {
+    const query = await Users_types.findOne({ utype_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invaild utype id');
         await Users_types.remove(query);

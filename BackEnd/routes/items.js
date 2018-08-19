@@ -18,8 +18,8 @@ router.get('/count', Auth, async (req, res) => {
     res.json(result);
 })
 
-router.get('/', Auth,async (req, res) => {
-    const query = { item_id: req.body.item_id };
+router.post('/:id', Auth,async (req, res) => {
+    const query = { item_id: req.params.id };
     const result = await Items
         .find(query);
     res.send(result);
@@ -38,9 +38,9 @@ router.post('/add', Auth,async (req,res) =>{
     }
 })
 
-router.put('/update', Auth,async (req,res) =>{
+router.put('/:id', Auth,async (req,res) =>{
     const updated = req.body ;
-    const query = await Items.findOne({ item_id: req.body.item_id });
+    const query = await Items.findOne({ item_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid item id');
         await Items.update(query,updated);
@@ -52,8 +52,8 @@ router.put('/update', Auth,async (req,res) =>{
 })
 
 
-router.delete('/delete', Auth,async (req,res) =>{
-    const query = await Items.findOne({ item_id: req.body.item_id });
+router.delete('/:id', Auth,async (req,res) =>{
+    const query = await Items.findOne({ item_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid item id');
         await Items.remove(query);

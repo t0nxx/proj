@@ -16,8 +16,8 @@ router.get('/', Auth , async (req, res) => {
     res.send(result);
 })
 
-router.get('/', Auth , async (req, res) => {
-    const query = { user_id: req.body.user_id };
+router.post('/:id', Auth , async (req, res) => {
+    const query = { user_id: req.params.id };
     const result = await Users
         .find(query);
     res.send(result);
@@ -47,9 +47,9 @@ router.post('/add', Auth,async (req, res) => {
     }
 })
 
-router.put('/update', Auth,async (req, res) => {
+router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
-    const query = await Users.findOne({ user_id: updated.user_id });
+    const query = await Users.findOne({ user_id: req.params.id });
     try {
         if(!query) return res.status(400).send('invalid user id');
         await Users.update(query, updated);
@@ -61,8 +61,8 @@ router.put('/update', Auth,async (req, res) => {
 })
 
 
-router.delete('/delete', Auth,async (req, res) => {
-    const query =await Users.findOne({ user_id: req.body.user_id });
+router.delete('/:id', Auth,async (req, res) => {
+    const query =await Users.findOne({ user_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid user id')
         await Users.remove(query);
