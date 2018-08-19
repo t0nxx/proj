@@ -2,53 +2,20 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const invoices_schema = new mongoose.Schema({
-    inv_id: Number ,
-    name: {
-        type : String ,
-        required : true
-    },
-    type_id: {
-        type : Number ,
-        required : true
-    },
-    data_from: {
-        type : String ,
-        required : true
-    },
-    data_to: {
-        type : String ,
-        required : true
-    },
-    price: {
-        type : Number ,
-        required : true
-    },
-    vat_percentage: {
-        type : String ,
-        required : true
-    },
-    company_name: {
-        type : String ,
-        required : true
-    },
-    client_name: {
-        type : String ,
-        required : true
-    },
-    client_phone: {
-        type : String ,
-        required : true
-    },
-    po_number: {
-        type : String ,
-        required : true
-    },
+    inv_id: Number,
+    name: String,
+    type_id: Number,
+    data_from: String,
+    data_to: String,
+    price: Number,
+    vat_percentage: String,
+    company_name: String,
+    client_name: String,
+    client_phone: String,
+    po_Number: String,
     accountant_lock: Boolean,
     account_manager_lock: Boolean,
-    items: [{
-        type : String ,
-        required : true
-    }]
+    items: [String]
 });
 const Invoices = mongoose.model('Invoices', invoices_schema);
 invoices_schema.plugin(AutoIncrement, { inc_field: 'inv_id' })

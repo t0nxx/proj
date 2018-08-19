@@ -17,7 +17,7 @@ router.get('/count', Auth, async (req, res) => {
         .count();
     res.json(result);
 })
-///
+
 router.post('/:id', Auth,async (req, res) => {
     const query = { item_id: req.params.id };
     const result = await Items
@@ -25,7 +25,7 @@ router.post('/:id', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.post('/add', Auth,async (req,res) =>{
+router.post('/', Auth,async (req,res) =>{
     const item = new Items({
         item_name : req.body.item_name ,
         item_description : req.body.item_description

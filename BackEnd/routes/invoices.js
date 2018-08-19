@@ -27,7 +27,7 @@ router.post('/:id', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.post('/add', Auth,async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const invoice = new Invoices({
         name: req.body.name,
         type_id: req.body.type_id,

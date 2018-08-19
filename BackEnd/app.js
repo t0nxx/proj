@@ -14,6 +14,7 @@ const UsersRoute = require('./routes/users');
 const UsersTypeRoute = require('./routes/userstypes');
 const ProductTypeRoute = require('./routes/prodtypes');
 const AuthRoute = require('./routes/auth');
+const LoginRoute = require('./routes/login');
 
 app.use(express.json());
 app.use('/items',   ItemsRoute ) ;
@@ -22,13 +23,9 @@ app.use('/users',      UsersRoute ) ;
 app.use('/userstypes',    UsersTypeRoute ) ;
 app.use('/prodtypes',    ProductTypeRoute ) ;
 app.use('/auth' , AuthRoute );
+app.use('/login' , LoginRoute);
 
 
 
 
 app.listen(3000 , () => console.log("running")) ;
-
-
-
-/// npm install mongoose@5.1.7
-

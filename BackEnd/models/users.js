@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
@@ -24,8 +23,8 @@ const users_schema = new mongoose.Schema({
         required: true ,
     },
     utype_id: {
-        type: Number ,
-        required: true 
+        type: String,
+        required: true
     }
 });
 

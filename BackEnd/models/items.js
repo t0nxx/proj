@@ -3,7 +3,7 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 
 const items_schema = new mongoose.Schema({
-    item_id: {type : Number},
+    item_id: Number,
     item_name: { type : String , required :true },
     item_description: { type: String, required: true }
 });

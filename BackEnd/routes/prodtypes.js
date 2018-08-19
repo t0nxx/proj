@@ -22,7 +22,7 @@ router.post('/:id', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.post('/add', Auth,async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const product = new Products_types({
         ptype_name: req.body.ptype_name
     });
