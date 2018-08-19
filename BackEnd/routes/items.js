@@ -18,7 +18,7 @@ router.get('/count', Auth, async (req, res) => {
     res.json(result);
 })
 
-router.get('/', Auth,async (req, res) => {
+router.post('/', Auth,async (req, res) => {
     const query = { item_id: req.body.item_id };
     const result = await Items
         .find(query);
