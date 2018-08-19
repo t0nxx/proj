@@ -10,11 +10,7 @@ const users_types_schema = new mongoose.Schema({
     utype_name: {
         type : String ,
         required : true 
-    },
-    users : [{
-        type : mongoose.SchemaTypes.Object ,
-        ref : 'Users'
-    }]
+    }
 });
 
 const Users_types = mongoose.model('Users_types', users_types_schema);

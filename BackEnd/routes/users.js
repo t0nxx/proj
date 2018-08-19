@@ -30,17 +30,13 @@ router.post('/add', Auth,async (req, res) => {
         password: req.body.password,
         utype_id: req.body.utype_id
     });
-    const usertype = await Users_types.findOne({utype_id : req.body.utype_id });
     const check = await Users.findOne({email:user.email});
     try {
         if(check) return res.status(400).send("user already reg");
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password , salt);
 
-        await usertype.users.push(user);
         await user.save();
-        await usertype.save();
-        console.log(usertype);
         res.json("added");
     } catch (error) {
         res.send(error.message);
@@ -85,7 +81,7 @@ router.post('/login', async (req, res) => {
         const valid = await bcrypt.compare(req.body.password, user.password);
         if (!valid) return res.status(400).send("wrong password");
         const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, {
-            expiresIn: "1h"
+            // expiresIn: "1h"
         });
         
         res.send({

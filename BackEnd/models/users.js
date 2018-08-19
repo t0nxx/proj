@@ -25,8 +25,7 @@ const users_schema = new mongoose.Schema({
     },
     utype_id: {
         type: Number ,
-        required: true ,
-        ref: 'Users_types'
+        required: true 
     }
 });
 
