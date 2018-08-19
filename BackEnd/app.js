@@ -1,6 +1,7 @@
 
 const Joi = require("joi") ;
 const express = require("express") ;
+const cors = require('cors');
 const app = express () ;
 require('dotenv');
 const mongoose = require('mongoose');
@@ -17,6 +18,7 @@ const AuthRoute = require('./routes/auth');
 const LoginRoute = require('./routes/login');
 
 app.use(express.json());
+app.use(cors());
 app.use('/items',   ItemsRoute ) ;
 app.use('/invoices',   InvoicesRoute ) ;
 app.use('/users',      UsersRoute ) ;
