@@ -5,7 +5,8 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 const users_types_schema = new mongoose.Schema({
     utype_id: {
         type: Number ,
-        required : true 
+        required : true ,
+        unique : true
     },
     utype_name: {
         type : String ,
