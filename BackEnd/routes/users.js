@@ -22,14 +22,18 @@ router.get('/:id', Auth , async (req, res) => {
 
 router.post('/', Auth,async (req, res) => {
     const user = new Users({
+        user_name : req.body.user_name,
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
         utype_id: req.body.utype_id
     });
-    const check = await Users.findOne({email:user.email});
+    const check = await Users.findOne({user_name:user.user_name});
+    const check1 = await Users.findOne({ email: user.email });
+
     try {
-        if(check) return res.status(400).send("user already reg");
+        if(check) return res.status(400).send("user name already reg");
+        if (check1) return res.status(400).send("email already reg");
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password , salt);
 

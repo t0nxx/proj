@@ -10,17 +10,18 @@ require('dotenv/config');
 router.post('/', async (req, res) => {
 
     try {
-        const user = await Users.findOne({ email: req.body.email });
-        if (!user) return res.status(400).send("wrong email");
+        const user = await Users.findOne({ user_name: req.body.user_name });
+        if (!user) return res.status(400).send("wrong user name");
 
         if (!req.body.password) return res.status(400).send("password is required")
         const valid = await bcrypt.compare(req.body.password, user.password);
         if (!valid) return res.status(400).send("wrong password");
-        const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, {
+        const token = jwt.sign({ user_name: user.user_name }, process.env.JWT_KEY, {
             expiresIn: "1h"
         });
 
         res.send({
+            user_name : user.user_name ,
             name: user.name,
             email: user.email,
             utype_id: user.utype_id,

@@ -4,6 +4,13 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const users_schema = new mongoose.Schema({
     user_id: Number,
+    user_name :{
+        type: String,
+        minlength: 5,
+        maxlength: 255,
+        required: true,
+        unique: true
+    },
     name: {
         type: String ,
         minlength : 3 ,
