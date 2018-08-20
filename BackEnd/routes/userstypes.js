@@ -16,14 +16,14 @@ router.get('/', Auth,async (req, res) => {
 
 
 router.get('/:id', Auth,async (req, res) => {
-    const query = { utype_id: req.params.id };
+    const query = { _id: req.params.id };
     const result = await Users_types
         .find(query);
     res.send(result);
 })
 
 router.get('/count/:id', Auth, async (req, res) => {
-    const query = { utype_id: req.params.id };
+    const query = { _id: req.params.id };
     const result = await Users
         .count(query);
     res.json(result);

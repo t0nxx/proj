@@ -4,6 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Products_types = require('../models/prodtypes');
 const Items = require('../models/items');
+const Invoices = require('../models/invoices');
 const Auth = require('../middlewars/auth');
 
 
@@ -23,16 +24,29 @@ router.get('/:id', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.get('/all/:id', Auth, async (req, res) => {
-    const query = { item_type: req.params.id };
+router.get('/items/:id', Auth, async (req, res) => {
+    const query = { item_id: req.params.id };
     const result = await Items
         .find(query);
     res.send(result);
 })
+router.get('/invoices/:id', Auth, async (req, res) => {
+    const query = { type_id: req.params.id };
+    const result = await Invoices
+        .find(query);
+    res.send(result);
+})
 
-router.get('/all/count/:id', Auth, async (req, res) => {
-    const query = { item_type: req.params.id };
+router.get('/items/count/:id', Auth, async (req, res) => {
+    const query = { item_id: req.params.id };
     const result = await Items
+        .count(query);
+    res.json(result);
+})
+
+router.get('/invoices/count/:id', Auth, async (req, res) => {
+    const query = { type_id: req.params.id };
+    const result = await Invoices
         .count(query);
     res.json(result);
 })
