@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Products_types = require('../models/prodtypes');
+const Items = require('../models/items');
 const Auth = require('../middlewars/auth');
 
 
@@ -15,11 +16,25 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.post('/:id', Auth,async (req, res) => {
+router.get('/:id', Auth,async (req, res) => {
     const query = { ptype_id: req.params.id };
     const result = await Products_types
         .find(query);
     res.send(result);
+})
+
+router.get('/all/:id', Auth, async (req, res) => {
+    const query = { item_type: req.params.id };
+    const result = await Items
+        .find(query);
+    res.send(result);
+})
+
+router.get('/all/count/:id', Auth, async (req, res) => {
+    const query = { item_type: req.params.id };
+    const result = await Items
+        .count(query);
+    res.json(result);
 })
 
 router.post('/', Auth,async (req, res) => {

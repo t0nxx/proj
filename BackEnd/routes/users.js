@@ -13,7 +13,7 @@ router.get('/', Auth , async (req, res) => {
     res.send(result);
 })
 
-router.post('/:id', Auth , async (req, res) => {
+router.get('/:id', Auth , async (req, res) => {
     const query = { user_id: req.params.id };
     const result = await Users
         .find(query);

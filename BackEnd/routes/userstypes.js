@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Users_types = require('../models/userstypes');
+const Users = require('../models/users');
 const Auth = require('../middlewars/auth');
 
 
@@ -13,11 +14,19 @@ router.get('/', Auth,async (req, res) => {
     res.send(result);
 })
 
-router.post('/:id', Auth,async (req, res) => {
+
+router.get('/:id', Auth,async (req, res) => {
     const query = { utype_id: req.params.id };
     const result = await Users_types
         .find(query);
     res.send(result);
+})
+
+router.get('/count/:id', Auth, async (req, res) => {
+    const query = { utype_id: req.params.id };
+    const result = await Users
+        .count(query);
+    res.json(result);
 })
 
 router.post('/', Auth,async (req, res) => {
