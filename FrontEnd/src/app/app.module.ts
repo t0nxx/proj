@@ -1,3 +1,4 @@
+import { ItemsTypesServices } from './services/itemsTypes.services';
 import { MainServices } from './services/main.services';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { AuthGuard } from './services/auth.services';
@@ -60,12 +61,13 @@ import { NotificationsServices } from './services/notifications.services';
       { path: "users", component: UsersComponent, canActivate: [AuthGuard]},
       { path: "addUser", component: AdduserComponent, canActivate: [AuthGuard]},
       { path: "usersTypes", component: UsersTypesComponent, canActivate: [AuthGuard]},
-      { path: "addUsersType", component: AddUsersTypeComponent, canActivate: [AuthGuard]},
+      { path: "updateUserType", component: AddUsersTypeComponent, canActivate: [AuthGuard]},
       { path: "items", component: ItemsComponent, canActivate: [AuthGuard]},
-      { path: "updateItem/:id", component: AddItemComponent, canActivate: [AuthGuard]},
       { path: "addItem", component: AddItemComponent, canActivate: [AuthGuard]},
-      { path: "types", component: TypesComponent, canActivate: [AuthGuard]},
-      { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]}
+      { path: "updateItem/:id", component: AddItemComponent, canActivate: [AuthGuard]},
+      { path: "itemsTypes", component: TypesComponent, canActivate: [AuthGuard]},
+      { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
+      { path: "updateItemsType/:id", component: AddItemsTypeComponent, canActivate: [AuthGuard]}
     ]),
     HttpModule,
     HttpClientModule,
@@ -77,7 +79,8 @@ import { NotificationsServices } from './services/notifications.services';
     AuthGuard,
     MessageService,
     NotificationsServices,
-    MainServices
+    MainServices,
+    ItemsTypesServices
   ],
   bootstrap: [AppComponent]
 })
