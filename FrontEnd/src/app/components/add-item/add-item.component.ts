@@ -50,7 +50,7 @@ export class AddItemComponent implements OnInit {
   editItem(item){
     this.main.PutRequest('items/' + item.item_id, item).subscribe(res => {
       console.log(res);
-      this.msgs = this.mess.showSuccess("Success", "Edit item Done", "success");
+      this.mess.showMessage("Success", "Edit item Done", "success");
       // this.router.navigateByUrl('/items');
     })
   }
@@ -62,7 +62,7 @@ export class AddItemComponent implements OnInit {
         item_name: "",
         item_description: ""
       }
-      this.msgs = this.mess.showSuccess("Success", "Add item Done", "success");
+      this.mess.showMessage("Success", "Add item Done", "success");
     });
   }
 

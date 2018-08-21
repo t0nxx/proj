@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
   deleteUser(id){
     this.main.DeleteRequest('users/' + id).subscribe(res => {
       console.log(res);
-      this.msgs = this.mess.showSuccess("Success", "Delete user Done", "warn");
+      this.mess.showMessage("Success", "Delete user Done", "warn");
     })
   }
 

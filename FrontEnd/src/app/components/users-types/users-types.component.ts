@@ -30,7 +30,7 @@ export class UsersTypesComponent implements OnInit {
   deleteUserType(id) {
     this.main.DeleteRequest('userstypes/' + id).subscribe(res => {
       console.log(res);
-      this.msgs = this.mess.showSuccess("Success", "Delete type Done", "warn");
+      this.mess.showMessage("Success", "Delete type Done", "warn");
     })
   }
 

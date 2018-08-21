@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { NotificationsServices } from './notifications.services';
 
 
 @Injectable({
@@ -16,7 +17,8 @@ export class MainServices {
     headers;
     constructor(
         private http: HttpClient,
-        private router: Router
+        private router: Router,
+        private mess: NotificationsServices
     ) {
 
         this.getToken();
@@ -31,6 +33,7 @@ export class MainServices {
             }
         }else {
             console.log(err.text);
+            this.mess.showMessage("Main Services", err.text, "error");
         }
     }
 

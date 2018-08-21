@@ -31,7 +31,7 @@ export class ItemsComponent implements OnInit {
     this.main.DeleteRequest('items/' + item_id).subscribe(res => {
       // console.log(res);
     });
-    this.msgs = this.mess.showSuccess("Success", "Delete item Done", "warn");
+    this.mess.showMessage("Success", "Delete item Done", "warn");
     this.getAllItems();
   }
 

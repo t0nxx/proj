@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     }
     this.main.PostRequest('login', body).subscribe(response => {
       console.log(response);
-      this.msgs = this.mess.showSuccess("Success", "Login Success", "success");
+      this.mess.showMessage("Success", "Login Success", "success");
       localStorage.setItem('currentUser', JSON.stringify(response));
       this.main.setHeaders(localStorage.getItem("currentUser"))
       setTimeout(() => {
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       }, 2000);
     }, err => {
       console.log(err.error);
-      this.msgs = this.mess.showSuccess("Error", err.error, "error");
+      this.mess.showMessage("Error", err.error, "error");
     });
   }
 

@@ -53,7 +53,7 @@ export class AdduserComponent implements OnInit {
   editUser(user) {
     this.main.PutRequest('users/' + user.user_id, user).subscribe(res => {
       console.log(res);
-      this.msgs = this.mess.showSuccess("Success", "Edit user Done", "success");
+      this.mess.showMessage("Success", "Edit user Done", "success");
     })
   }
 
@@ -69,10 +69,10 @@ export class AdduserComponent implements OnInit {
           utype_id: "",
           confirm: ""
         }
-        this.msgs = this.mess.showSuccess("Success", "Add user Done", "success");
+        this.mess.showMessage("Success", "Add user Done", "success");
       });
     }else {
-      this.msgs = this.mess.showSuccess("Error", "Password and confirm password should be the same", "error");
+      this.mess.showMessage("Error", "Password and confirm password should be the same", "error");
     }
   }
 

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
@@ -10,12 +9,14 @@ import { NotificationsServices } from './../../services/notifications.services';
 })
 export class HomeComponent implements OnInit {
 
-  msgs: Message[] = [];
 
   constructor(
-    mess: NotificationsServices
+    private mess: NotificationsServices
   ) {
-    // this.msgs = mess.showSuccess();
+  }
+
+  show(){
+    this.mess.showMessage("Success", "Edit item Done", "success");
   }
 
   ngOnInit() {

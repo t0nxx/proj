@@ -46,7 +46,7 @@ export class AddItemsTypeComponent implements OnInit {
     // console.log(itemType)
     this.main.PutRequest('prodtypes/' + itemType.ptype_id, itemType).subscribe(res => {
       // console.log(res);
-      this.msgs = this.mess.showSuccess("Success", "Edit item Done", "success");
+      this.mess.showMessage("Success", "Edit item Done", "success");
       // this.router.navigateByUrl('/items');
     })
   }
@@ -57,7 +57,7 @@ export class AddItemsTypeComponent implements OnInit {
       this.type = {
         ptype_name: ""
       }
-      this.msgs = this.mess.showSuccess("Success", "Add item Type Done", "success");
+      this.mess.showMessage("Success", "Add item Type Done", "success");
     });
   }
 
