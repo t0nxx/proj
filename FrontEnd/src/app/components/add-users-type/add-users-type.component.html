@@ -1,3 +1,44 @@
-<p>
-  add-users-type works!
-</p>
+<p-growl [(value)]="msgs"></p-growl>
+
+<div class="col-xs-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading" *ngIf="state == 'Edit' && type">Edit Users Type</div>
+    <div class="panel-heading" *ngIf="state == 'Add'">Add Users Type</div>
+    <div class="panel-body">
+      <div class="row">
+
+
+        <div class="col-xs-12" *ngIf="state == 'Edit' && type">
+          <form>
+            <div class="form-group">
+              <label for="utype_id">User Type ID</label>
+              <input autocomplete="no" name="utype_id" type="number" class="form-control" id="utype_id" [(ngModel)]="type.utype_id">
+            </div>
+            <div class="form-group">
+              <label for="utype_name">User Type Name</label>
+              <input autocomplete="no" name="utype_name" type="text" class="form-control" id="utype_name" [(ngModel)]="type.utype_name">
+            </div>
+            <button type="submit" class="btn btn-default" (click)="editUserType(type)">Edit</button>
+          </form>
+        </div>
+
+
+        <div class="col-xs-12" *ngIf="state == 'Add'">
+          <form>
+            <div class="form-group">
+              <label for="utype_id">User Type ID</label>
+              <input autocomplete="no" name="utype_id" type="number" class="form-control" id="utype_id" [(ngModel)]="type.utype_id">
+            </div>
+            <div class="form-group">
+              <label for="utype_name">User Type Name</label>
+              <input autocomplete="no" name="utype_name" type="text" class="form-control" [(ngModel)]="type.utype_name">
+            </div>
+            <button type="submit" class="btn btn-default" (click)="addUserType(type)">Add</button>
+          </form>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

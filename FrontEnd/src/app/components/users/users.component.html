@@ -1,20 +1,43 @@
-<table class="table">
-  <thead class="black white-text">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Password</th>
-      <th scope="col">type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users">
-      <th scope="row">{{user.user_id}}</th>
-      <td>{{user.name}}</td>
-      <td>{{user.email}}</td>
-      <td>{{user.password}}</td>
-      <td>{{user.type_name}}</td>
-    </tr>
-  </tbody>
-</table>
+<p-growl [(value)]="msgs"></p-growl>
+
+<div class="col-xs-12">
+  <div class="panel panel-primary">
+    <div class="panel-heading">All Users</div>
+    <div class="panel-body">
+      <div class="row">
+
+        <div class="col-xs-12">
+          <table class="table">
+            <thead class="black white-text">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">type</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users; let index = index">
+                <!-- <th scope="row">{{item.item_id}}</th> -->
+                <th scope="row">{{index + 1}}</th>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.utype_id}}</td>
+                <td class="actions">
+                  <a (click)="deleteUser(user.item_id)">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </a>
+                  <a routerLink="{{'/updateItem/' + user.item_id}}">
+                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
