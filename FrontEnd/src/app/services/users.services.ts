@@ -1,3 +1,4 @@
+import { MainServices } from './main.services';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,6 +10,7 @@ export class UsersServices {
   types;
   
   constructor(
+    private main: MainServices
   ){
 
   }

@@ -1,3 +1,4 @@
+<p-growl [(value)]="msgs"></p-growl>
 <div class="container loginForm">
   <div class="row">
     <h2 class="text-center">Welcome</h2>
@@ -5,15 +6,13 @@
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <form>
         <div class="form-group">
-          <!-- <label for="exampleInputEmail1">Email address</label> -->
-          <input type="email" [(ngModel)]="email" class="form-control" name="email" placeholder="Your Email">
+          <input type="text" [(ngModel)]="user_name" class="form-control" name="user_name" placeholder="Your User Name">
         </div>
         <div class="form-group">
-          <!-- <label for="exampleInputPassword1">Password</label> -->
           <input type="password" [(ngModel)]="password" class="form-control" name="password" placeholder="Your Password">
         </div>
         <div class="form-check">
-          <button type="submit" class="btn btn-primary" (click)="login(email, password)">Login</button>
+          <button type="submit" class="btn btn-primary" (click)="login(user_name, password)">Login</button>
         </div>
       </form>
     </div>

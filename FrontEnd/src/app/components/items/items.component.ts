@@ -1,6 +1,6 @@
-// import { Items } from './../../interfaces/items';
 import { MainServices } from './../../services/main.services';
-import { Component, OnInit } from '@angular/core';import { Message } from 'primeng/components/common/api';
+import { Component, OnInit } from '@angular/core';
+import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
@@ -23,15 +23,15 @@ export class ItemsComponent implements OnInit {
   getAllItems() {
     this.main.getRequest('items').subscribe(data => {
       this.items = data;
-      console.log(this.items)
+      // console.log(this.items)
     })
   }
 
   deleteItem(item_id){
     this.main.DeleteRequest('items/' + item_id).subscribe(res => {
-      console.log(res);
+      // console.log(res);
     });
-    this.msgs = this.mess.showSuccess("Success", "Delete item Done", "warn");
+    this.mess.showMessage("Success", "Delete item Done", "warn");
     this.getAllItems();
   }
 

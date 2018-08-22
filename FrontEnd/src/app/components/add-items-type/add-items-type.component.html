@@ -1,3 +1,51 @@
-<p>
-  add-items-type works!
-</p>
+<p-growl [(value)]="msgs"></p-growl>
+
+<div class="col-xs-12">
+
+
+
+  <div class="panel panel-primary" *ngIf="state == 'Edit' && type">
+    <div class="panel-heading" *ngIf="state == 'Edit' && type">Edit Item Type</div>
+    <div class="panel-body">
+      <div class="row">
+
+        <div class="col-xs-12">
+
+          <div class="form-group">
+            <label for="ptype_name">Item Name</label>
+            <input autocomplete="no" name="ptype_name" type="text" class="form-control" id="ptype_name" [(ngModel)]="type.ptype_name">
+          </div>
+
+          <button type="submit" *ngIf="state == 'Edit' && type" class="btn btn-default" (click)="editItemType(type)">Edit</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-primary" *ngIf="state == 'Add'">
+    <div class="panel-heading" *ngIf="state == 'Add'">Add Item Type</div>
+    <div class="panel-body">
+      <div class="row">
+
+        <div class="col-xs-12">
+
+          <div class="form-group">
+            <label for="ptype_name">Item Name</label>
+            <input autocomplete="no" name="ptype_name" type="text" class="form-control" id="ptype_name" [(ngModel)]="type.ptype_name">
+          </div>
+
+          <button type="submit" *ngIf="state == 'Add'" class="btn btn-default" (click)="addItemType(type)">Add</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

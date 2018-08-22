@@ -1,8 +1,9 @@
+import { ItemsTypesServices } from './../../services/itemsTypes.services';
 import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 import { MainServices } from './../../services/main.services';
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-item',
@@ -14,17 +15,18 @@ export class AddItemComponent implements OnInit {
   item;
   id;
   state;
+  types;
   msgs: Message[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private main: MainServices,
-    private mess: NotificationsServices
+    private mess: NotificationsServices,
+    private itemsTypes: ItemsTypesServices
   ) {
     this.route.params.subscribe(param => {
       this.id = param.id;
-      // console.log(this.id, typeof this.id)
+      this.getTypes()
       if (this.id !== undefined) {
         this.state = "Edit";
         this.getItemData();
@@ -48,20 +50,27 @@ export class AddItemComponent implements OnInit {
   editItem(item){
     this.main.PutRequest('items/' + item.item_id, item).subscribe(res => {
       console.log(res);
+      this.mess.showMessage("Success", "Edit item Done", "success");
+      // this.router.navigateByUrl('/items');
     })
-    this.msgs = this.mess.showSuccess("Success", "Edit item Done", "success");
-    // this.router.navigateByUrl('/items');
   }
 
   addItem(item){
-    this.main.PostRequest('items', item).subscribe(res => {
+    this.main.PostRequest('items/add', item).subscribe(res => {
       console.log(res);
+      this.item = {
+        item_name: "",
+        item_description: ""
+      }
+      this.mess.showMessage("Success", "Add item Done", "success");
     });
-    this.item = {
-      item_name: "",
-      item_description: ""
-    }
-    this.msgs = this.mess.showSuccess("Success", "Add item Done", "success");
+  }
+
+  getTypes(){
+    this.itemsTypes.getAll().subscribe(data => {
+      this.types = data;
+      console.log(this.types)
+    })
   }
 
   ngOnInit() {

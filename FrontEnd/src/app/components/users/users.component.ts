@@ -1,31 +1,41 @@
-// import { UsersServices } from './../../services/users.services';
-// import { Users } from './../../interfaces/users';
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
-// import { moveIn } from '../router.animations'
+import { MainServices } from '../../services/main.services';
+import { Message } from 'primeng/components/common/api';
+import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
-  // animations: [moveTo()],
-  // host: {'[@moveIn]': ''}
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
 
   users;
-  types;
+  msgs: Message[] = [];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private main: MainServices,
+    private mess: NotificationsServices
   ) {
 
-    this.getUsersList();
+    this.getAllUsers()
 
   }
 
-  getUsersList() {
-   
+  getAllUsers() {
+    this.main.getRequest('users').subscribe(data => {
+      this.users = data;
+      console.log(this.users)
+    });
+  }
+
+  deleteUser(id){
+    this.main.DeleteRequest('users/' + id).subscribe(res => {
+      console.log(res);
+      this.mess.showMessage("Success", "Delete user Done", "warn");
+    })
   }
 
   ngOnInit() {
