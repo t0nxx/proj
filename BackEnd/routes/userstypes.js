@@ -48,7 +48,7 @@ router.put('/:id', Auth,async (req, res) => {
     try {
         if(!query) return res.status(400).send('invaild utype id');
         await Users_types.update(query, updated);
-        res.send("updated");
+        res.json("updated");
     } catch (error) {
         res.send(error.message);
     }
@@ -61,7 +61,7 @@ router.delete('/:id', Auth,async (req, res) => {
     try {
         if (!query) return res.status(400).send('invaild utype id');
         await Users_types.remove(query);
-        res.send("removed");
+        res.json("removed");
     } catch (error) {
         res.send(error.message);
     }
