@@ -25,20 +25,23 @@ export class AdduserComponent implements OnInit {
   ) {
     this.route.params.subscribe(param => {
       this.id = param.id;
+      // console.log(this.id, typeof this.id, Number(this.id), typeof Number(this.id))
       this.getUsersTypes();
-      // console.log(this.id, typeof this.id)
       if (this.id !== undefined) {
         this.state = "Edit";
         this.getUserData(this.id);
-      } else {
+      } else if(this.id === undefined) {
         this.state = "Add";
         this.user = {
           name: "",
+          user_name: "",
           email: "",
-          password: "",
           utype_id: "",
+          password: "",
           confirm: ""
         }
+      }else {
+        this.router.navigateByUrl('/login');
       }
     })
   }
@@ -57,19 +60,23 @@ export class AdduserComponent implements OnInit {
     })
   }
 
-  addUser(user) {
+  addAndUpdateUser(user) {
     if(user.password === user.confirm){
       delete user["confirm"];
       this.main.PostRequest('users', user).subscribe(res => {
         console.log(res);
         this.user = {
           name: "",
+          user_name: "",
           email: "",
-          password: "",
           utype_id: "",
+          password: "",
           confirm: ""
         }
         this.mess.showMessage("Success", "Add user Done", "success");
+      }, err => {
+        console.log(err)
+        this.mess.showMessage("Success", err, "error");
       });
     }else {
       this.mess.showMessage("Error", "Password and confirm password should be the same", "error");

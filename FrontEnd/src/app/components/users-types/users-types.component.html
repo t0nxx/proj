@@ -16,14 +16,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let type of types; let index = index">
+              <tr *ngFor="let type of usersTypes; let index = index">
                 <th scope="row">{{index + 1}}</th>
-                <td>{{type.name}}</td>
+                <td>{{type.utype_name}}</td>
                 <td class="actions">
-                  <a (click)="deleteUserType(type.item_id)">
+                  <a (click)="deleteUserType(type.utype_id)">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
-                  <a routerLink="{{'/updateUserType/' + type.item_id}}">
+                  <a routerLink="{{'/updateUserType/' + type.utype_id}}">
                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                   </a>
                 </td>
