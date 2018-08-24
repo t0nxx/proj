@@ -50,7 +50,7 @@ router.put('/:id', Auth,async (req, res) => {
     try {
         if(!query) return res.status(400).send('invalid user id');
         await Users.update(query, updated);
-        res.send("updated");
+        res.json("updated");
     } catch (error) {
         res.send(error.message);
     }
@@ -63,7 +63,7 @@ router.delete('/:id', Auth,async (req, res) => {
     try {
         if (!query) return res.status(400).send('invalid user id')
         await Users.remove(query);
-        res.send("removed");
+        res.json("removed");
     } catch (error) {
         res.send(error.message);
     }
