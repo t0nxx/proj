@@ -62,6 +62,7 @@ import { NotificationsServices } from './services/notifications.services';
       { path: "addUser", component: AdduserComponent, canActivate: [AuthGuard]},
       { path: "updateUser/:id", component: AdduserComponent, canActivate: [AuthGuard]},
       { path: "usersTypes", component: UsersTypesComponent, canActivate: [AuthGuard]},
+      { path: "addUserType", component: AddUsersTypeComponent, canActivate: [AuthGuard]},
       { path: "updateUserType/:id", component: AddUsersTypeComponent, canActivate: [AuthGuard]},
       { path: "items", component: ItemsComponent, canActivate: [AuthGuard]},
       { path: "addItem", component: AddItemComponent, canActivate: [AuthGuard]},

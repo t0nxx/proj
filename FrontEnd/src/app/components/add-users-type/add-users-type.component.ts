@@ -1,4 +1,3 @@
-import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 import { MainServices } from './../../services/main.services';
 import { Component, OnInit } from '@angular/core';
@@ -14,7 +13,6 @@ export class AddUsersTypeComponent implements OnInit {
   type;
   id;
   state;
-  msgs: Message[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -39,20 +37,17 @@ export class AddUsersTypeComponent implements OnInit {
   getTypeData(id) {
     this.main.getRequest('userstypes/' + id).subscribe(data => {
       this.type = data[0];
-      console.log(this.type);
     })
   }
 
   editUserType(type) {
     this.main.PutRequest('userstypes/' + type.user_id, type).subscribe(res => {
-      console.log(res);
       this.mess.showMessage("Success", "Edit type Done", "success");
     })
   }
 
   addUserType(type) {
     this.main.PostRequest('userstypes', type).subscribe(res => {
-      console.log(res);
       this.type = {
         utype_name: "",
         utype_id: ""
