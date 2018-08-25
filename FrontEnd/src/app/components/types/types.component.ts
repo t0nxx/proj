@@ -1,5 +1,6 @@
 import { ItemsTypesServices } from './../../services/itemsTypes.services';
 import { Component } from '@angular/core';
+import { NotificationsServices } from '../../services/notifications.services';
 
 @Component({
     selector: 'types',
@@ -9,24 +10,25 @@ import { Component } from '@angular/core';
 export class TypesComponent {
 
     types;
-    
+
     constructor(
-        private itemsTypes: ItemsTypesServices
-    ){
+        private itemsTypes: ItemsTypesServices,
+        private mess: NotificationsServices
+    ) {
 
         this.getAllItemsTypes();
 
     }
 
-    getAllItemsTypes(){
+    getAllItemsTypes() {
         this.itemsTypes.getAll().subscribe(data => {
             this.types = data;
         })
     }
 
-    deleteItemType(id){
+    deleteItemType(id) {
         this.itemsTypes.deleteType(id).subscribe(res => {
-            console.log(res);
+            this.mess.showMessage("Success", "Delete type Done", "warn");
             this.getAllItemsTypes();
         })
     }

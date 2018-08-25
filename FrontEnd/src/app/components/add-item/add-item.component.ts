@@ -56,7 +56,7 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem(item){
-    this.main.PostRequest('items/add', item).subscribe(res => {
+    this.main.PostRequest('items', item).subscribe(res => {
       console.log(res);
       this.item = {
         item_name: "",

@@ -38,27 +38,30 @@ export class AddItemsTypeComponent implements OnInit {
   getItemTypeData() {
     this.main.getRequest('prodtypes/' + this.id).subscribe(data => {
       this.type = data[0];
-      // console.log(this.type);
     })
   }
 
   editItemType(itemType) {
-    // console.log(itemType)
-    this.main.PutRequest('prodtypes/' + itemType.ptype_id, itemType).subscribe(res => {
-      // console.log(res);
-      this.mess.showMessage("Success", "Edit item Done", "success");
-      // this.router.navigateByUrl('/items');
-    })
+    if (itemType.ptype_name !== "") {
+      this.main.PutRequest('prodtypes/' + itemType.ptype_id, itemType).subscribe(res => {
+        this.mess.showMessage("Success", "Edit item Done", "success");
+      })
+    } else {
+      this.mess.showMessage("Failed", "Type name can't ne empty", "error");
+    }
   }
 
   addItemType(itemType) {
-    this.main.PostRequest('prodtypes', itemType).subscribe(res => {
-      // console.log(res);
-      this.type = {
-        ptype_name: ""
-      }
-      this.mess.showMessage("Success", "Add item Type Done", "success");
-    });
+    if (itemType.ptype_name !== "") {
+      this.main.PostRequest('prodtypes', itemType).subscribe(res => {
+        this.type = {
+          ptype_name: ""
+        }
+        this.mess.showMessage("Success", "Add item Type Done", "success");
+      });
+    } else {
+      this.mess.showMessage("Failed", "Type name can't ne empty", "error");
+    }
   }
 
   ngOnInit() {
