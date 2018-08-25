@@ -19,6 +19,12 @@
               <textarea name="item_description" class="form-control" id="item_description" [(ngModel)]="item.item_description" cols="30"
                 rows="10"></textarea>
             </div>
+            <div class="form-group">
+              <label for="item_type">Item Type</label>
+              <select name="item_type" class="form-control" id="item_type" [(ngModel)]="item.item_type">
+                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
+              </select>
+            </div>
             <button type="submit" class="btn btn-default" (click)="editItem(item)">Edit</button>
           </form>
         </div>
@@ -34,6 +40,13 @@
               <label for="item_description">Item Description</label>
               <textarea name="item_description" class="form-control" id="item_description" [(ngModel)]="item.item_description" cols="30"
                 rows="10"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="item_type">Item Type</label>
+              <select name="item_type" class="form-control" id="item_type" [(ngModel)]="item.item_type">
+                <option value="">-- Please Select --</option>
+                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
+              </select>
             </div>
             <button type="submit" class="btn btn-default" (click)="addItem(item)">Add</button>
           </form>

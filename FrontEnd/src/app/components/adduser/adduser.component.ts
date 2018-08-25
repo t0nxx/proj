@@ -76,7 +76,7 @@ export class AdduserComponent implements OnInit {
         this.mess.showMessage("Success", "Add user Done", "success");
       }, err => {
         console.log(err)
-        this.mess.showMessage("Success", err, "error");
+        this.mess.showMessage("Success", err.error, "error");
       });
     }else {
       this.mess.showMessage("Error", "Password and confirm password should be the same", "error");

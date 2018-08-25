@@ -25,6 +25,7 @@
           <div class="form-group">
             <label for="user_type">type</label>
             <select name="user_type" id="user_type" class="form-control" [(ngModel)]="user.utype_id">
+              <option value="">-- Please Select --</option>
               <option *ngFor="let type of types" value="{{type.utype_id}}">{{type.utype_name}}</option>
             </select>
           </div>
@@ -58,6 +59,7 @@
           <div class="form-group">
             <label for="user_type">type</label>
             <select name="user_type" id="user_type" class="form-control" [(ngModel)]="user.utype_id">
+              <option value="">-- Please Select --</option>
               <option *ngFor="let type of types" value="{{type.utype_id}}">{{type.utype_name}}</option>
             </select>
           </div>

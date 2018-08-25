@@ -34,7 +34,8 @@ export class AddItemComponent implements OnInit {
         this.state = "Add";
         this.item = {
           item_name: "",
-          item_description: ""
+          item_description: "",
+          item_type: ""
         }
       }
     })
@@ -51,16 +52,18 @@ export class AddItemComponent implements OnInit {
     this.main.PutRequest('items/' + item.item_id, item).subscribe(res => {
       console.log(res);
       this.mess.showMessage("Success", "Edit item Done", "success");
-      // this.router.navigateByUrl('/items');
     })
   }
 
   addItem(item){
+    Number(item.item_type)
+    console.log(item)
     this.main.PostRequest('items', item).subscribe(res => {
       console.log(res);
       this.item = {
         item_name: "",
-        item_description: ""
+        item_description: "",
+        item_type: ""
       }
       this.mess.showMessage("Success", "Add item Done", "success");
     });

@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
     private mess: NotificationsServices
   ) {
 
-    this.getAllUsers()
+    this.getAllUsers();
 
   }
 
@@ -35,6 +35,7 @@ export class UsersComponent implements OnInit {
     this.main.DeleteRequest('users/' + id).subscribe(res => {
       console.log(res);
       this.mess.showMessage("Success", "Delete user Done", "warn");
+      this.getAllUsers();
     })
   }
 
