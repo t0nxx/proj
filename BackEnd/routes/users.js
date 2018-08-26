@@ -9,14 +9,45 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth , async (req, res) => {
     const result = await Users
-        .find();
+        .find({isDeleted : ! true});
     res.send(result);
 })
 
-router.get('/:id', Auth , async (req, res) => {
-    const query = { user_id: req.params.id };
+router.get('/deletedusers', Auth, async (req, res) => {
     const result = await Users
-        .find(query);
+        .find({ isDeleted: true });
+    res.send(result);
+})
+
+
+router.get('/:id', Auth , async (req, res) => {
+    const query = req.params.id;
+    console.log(query);
+    const result = await Users
+        .aggregate([
+            {
+                $match: {
+                    user_id: parseInt(query),
+                    isDeleted : ! true
+                }
+            },
+            {
+                $lookup: {
+                    from: "users_types",
+                    localField: "utype_id",
+                    foreignField: "utype_id",
+                    as: "usertype"
+                }
+            },
+            { $unwind: '$usertype' },
+            {
+                $project: {
+                    'usertype._id': 0,
+                    'usertype.utype_id': 0,
+                    'usertype.__v': 0
+                }
+            }
+        ]);
     res.send(result);
 })
 
@@ -46,7 +77,7 @@ router.post('/', Auth,async (req, res) => {
 
 router.put('/:id', Auth,async (req, res) => {
     const updated = req.body;
-    const query = await Users.findOne({ user_id: req.params.id });
+    const query = await Users.findOne({ user_id: req.params.id , isDeleted : ! true});
     try {
         if(!query) return res.status(400).send('invalid user id');
         await Users.update(query, updated);
@@ -62,49 +93,25 @@ router.delete('/:id', Auth,async (req, res) => {
     const query =await Users.findOne({ user_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid user id')
-        await Users.remove(query);
-        res.json("removed");
+        await Users.update(query,{isDeleted : true});
+        res.json("isDeleted set to be true");
     } catch (error) {
         res.send(error.message);
     }
 
 })
 
-
-
-// router.post('/login', async (req, res) => {
-
+// router.delete('/:id', Auth, async (req, res) => {
+//     const query = await Users.findOne({ user_id: req.params.id });
 //     try {
-//         const user = await Users.findOne({ email: req.body.email });
-//         if (!user) return res.status(400).send("wrong email");
-
-//         if (!req.body.password) return res.status(400).send("password is required")
-//         const valid = await bcrypt.compare(req.body.password, user.password);
-//         if (!valid) return res.status(400).send("wrong password");
-//         const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, {
-//             expiresIn: "1h"
-//         });
-        
-//         res.send({
-//             name : user.name,
-//             email : user.email,
-//             utype_id : user.utype_id ,
-//             token : token
-//         });
-        
+//         if (!query) return res.status(400).send('invalid user id')
+//         await Users.remove(query);
+//         res.json("removed");
 //     } catch (error) {
 //         res.send(error.message);
 //     }
-    
+
 // })
-
-
-
-
-
-
-
-
 
 
 
