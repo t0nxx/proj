@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
 const Users = require('../models/users');
+const Users_types = require('../models/userstypes');
 const bcrypt = require('bcrypt');
 const Auth = require('../middlewars/auth');
 
@@ -13,10 +14,29 @@ router.get('/', Auth , async (req, res) => {
     res.send(result);
 })
 
-router.get('/:id', Auth , async (req, res) => {
-    const query = { user_id: req.params.id };
+router.get('/:id',Auth ,async (req, res) => {
+    const query = req.params.id ;
+    console.log(query);
     const result = await Users
-        .find(query);
+    .aggregate([
+
+            {$match: {
+                user_id: parseInt(query)
+            }},
+            {$lookup : {
+                from: "users_types",
+                localField: "utype_id",    
+                foreignField: "utype_id", 
+                as: "usertype"
+            }},
+            {$unwind : '$usertype'},
+            {$project : {
+                'usertype._id' :0,
+                'usertype.utype_id': 0,
+                'usertype.__v': 0
+            }}
+
+        ]);
     res.send(result);
 })
 
