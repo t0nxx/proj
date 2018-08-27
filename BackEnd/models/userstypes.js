@@ -11,6 +11,10 @@ const users_types_schema = new mongoose.Schema({
     utype_name: {
         type : String ,
         required : true 
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
     }
 });
 

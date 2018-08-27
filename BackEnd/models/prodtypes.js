@@ -4,7 +4,11 @@ const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const products_types_schema = new mongoose.Schema({
     ptype_id: Number,
-    ptype_name: String
+    ptype_name: String,
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const Products_types = mongoose.model('Products_types', products_types_schema);

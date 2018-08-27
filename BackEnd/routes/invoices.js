@@ -10,18 +10,24 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth,async (req, res) => {
     const result = await Invoices
-        .find();
+        .find({isDeleted : !true});
+    res.send(result);
+})
+
+router.get('/deletedinvoices', Auth, async (req, res) => {
+    const result = await Invoices
+        .find({isDeleted : true});
     res.send(result);
 })
 
 router.get('/count', Auth, async (req, res) => {
     const result = await Invoices
-        .count();
+        .count({isDeleted : !true});
     res.json(result);
 })
 
 router.get('/:id', Auth,async (req, res) => {
-    const query = { inv_id: req.params.id };
+    const query = { inv_id: req.params.id , isDeleted :!true };
     const result = await Invoices
         .find(query);
     res.send(result);
@@ -69,8 +75,8 @@ router.delete('/:id', Auth,async (req, res) => {
     const query = await Invoices.findOne({ inv_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid inv id');
-        await Invoices.remove(query);
-        res.json("removed");
+        await Invoices.update(query,{isDeleted : true});
+        res.json("isDeleted set to be true");
     } catch (error) {
         res.send(error.message);
     }

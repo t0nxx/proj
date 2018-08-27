@@ -10,20 +10,26 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth,async (req, res) => {
     const result = await Users_types
-        .find();
+        .find({isDeleted : !true});
+    res.send(result);
+})
+
+router.get('/deleteduserstypes', Auth, async (req, res) => {
+    const result = await Users_types
+        .find({isDeleted : true});
     res.send(result);
 })
 
 
 router.get('/:id', Auth,async (req, res) => {
-    const query = { _id: req.params.id };
+    const query = { _id: req.params.id ,isDeleted: !true };
     const result = await Users_types
         .find(query);
     res.send(result);
 })
 
 router.get('/count/:id', Auth, async (req, res) => {
-    const query = { _id: req.params.id };
+    const query = { _id: req.params.id,isDeleted : !true };
     const result = await Users
         .count(query);
     res.json(result);
@@ -60,8 +66,8 @@ router.delete('/:id', Auth,async (req, res) => {
     const query = await Users_types.findOne({ _id: req.params.id });
     try {
         if (!query) return res.status(400).send('invaild utype id');
-        await Users_types.remove(query);
-        res.json("removed");
+        await Users_types.update(query,{isDeleted :true});
+        res.json("isDeleted set to be true");
     } catch (error) {
         res.send(error.message);
     }

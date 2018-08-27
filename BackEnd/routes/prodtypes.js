@@ -13,39 +13,46 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth,async (req, res) => {
     const result = await Products_types
-        .find();
+        .find({isDeleted : !true});
+    res.send(result);
+})
+
+
+router.get('/deleteditemstype', Auth, async (req, res) => {
+    const result = await Products_types
+        .find({ isDeleted: true });
     res.send(result);
 })
 
 router.get('/:id', Auth,async (req, res) => {
-    const query = { ptype_id: req.params.id };
+    const query = { ptype_id: req.params.id , isDeleted : !true };
     const result = await Products_types
         .find(query);
     res.send(result);
 })
 
 router.get('/items/:id', Auth, async (req, res) => {
-    const query = { item_id: req.params.id };
+    const query = { item_id: req.params.id , isDeleted : !true};
     const result = await Items
         .find(query);
     res.send(result);
 })
 router.get('/invoices/:id', Auth, async (req, res) => {
-    const query = { type_id: req.params.id };
+    const query = { type_id: req.params.id , isDeleted:!true};
     const result = await Invoices
         .find(query);
     res.send(result);
 })
 
 router.get('/items/count/:id', Auth, async (req, res) => {
-    const query = { item_id: req.params.id };
+    const query = { item_id: req.params.id , isDeleted :!true};
     const result = await Items
         .count(query);
     res.json(result);
 })
 
 router.get('/invoices/count/:id', Auth, async (req, res) => {
-    const query = { type_id: req.params.id };
+    const query = { type_id: req.params.id , isDeleted :!true};
     const result = await Invoices
         .count(query);
     res.json(result);
@@ -81,8 +88,8 @@ router.delete('/:id', Auth,async (req, res) => {
     const query = await Products_types.findOne({ ptype_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid prod id');
-        await Products_types.remove(query);
-        res.json("removed");
+        await Products_types.update(query,{isDeleted :true});
+        res.json("isDeleted set to be true");
     } catch (error) {
         res.send(error.message);
     }

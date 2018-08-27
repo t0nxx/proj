@@ -15,7 +15,11 @@ const invoices_schema = new mongoose.Schema({
     po_Number: String,
     accountant_lock: Boolean,
     account_manager_lock: Boolean,
-    items: [{}]
+    items: [{}],
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
 });
 const Invoices = mongoose.model('Invoices', invoices_schema);
 invoices_schema.plugin(AutoIncrement, { inc_field: 'inv_id' })
