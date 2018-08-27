@@ -28,7 +28,8 @@ router.get('/:id', Auth,async (req, res) => {
 router.post('/', Auth,async (req,res) =>{
     const item = new Items({
         item_name : req.body.item_name ,
-        item_description : req.body.item_description
+        item_description : req.body.item_description ,
+        item_type : req.body.item_type
     });
     try {
         await item.save();
