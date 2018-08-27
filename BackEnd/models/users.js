@@ -33,6 +33,10 @@ const users_schema = new mongoose.Schema({
     utype_id: {
         type: Number ,
         required: true 
+    },
+    isDeleted : {
+        type : Boolean ,
+        default : false
     }
 });
 
