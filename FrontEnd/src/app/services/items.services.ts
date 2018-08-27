@@ -18,11 +18,7 @@ export class ItemsServices {
   }
 
   getAllItems(){
-    
-    this.main.getRequest('items').subscribe(data => {
-        console.log(data);
-    })
-
+    return this.main.getRequest('items');
   }
 
 }

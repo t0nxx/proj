@@ -5,6 +5,7 @@
 @import '~primeng/resources/primeng.min.css';
 @import '~bootstrap3/dist/css/bootstrap.min.css';
 @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 .btn-primary,
 .btn-primary:hover {
@@ -25,6 +26,10 @@
 .panel-primary>.panel-heading {
     background-color: #cb73a8;
     border-color: #cb73a8;
+    font-size: 20px;
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .panel-primary {
@@ -42,4 +47,50 @@ td.actions a {
     margin-right: 5px;
     color: white;
     font-size: 20px;
+}
+
+button[type='submit'],
+button[type='submit']:hover,
+button[type='submit']:focus {
+    width: 100%;
+    font-weight: bold;
+    padding: 10px 0;
+    font-size: 18px;
+    background-color: #cb73a8;
+    color: white;
+    text-transform: capitalize;
+}
+.addedItemBlock {
+    border: 1pt solid #cb73a8;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.addedItemBlock i {
+    position: absolute;
+    padding: 2px 5px;
+    border-radius: 3px;
+    top: 14px;
+    right: 9px;
+    z-index: 9;
+    width: 25px;
+    height: 25px;
+    background: red;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+.addedItemBlock input {
+    margin: 5px 0;
+}
+.inputNote {
+    color: red;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 5px;
+    cursor: all-scroll;
 }

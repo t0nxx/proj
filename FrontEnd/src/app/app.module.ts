@@ -15,7 +15,13 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
 
+import { ReactiveFormsModule } from '@angular/forms';
+
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatAutocompleteModule, MatInputModule} from '@angular/material';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 import { AppComponent } from './app.component';
 import { UsersComponent } from './components/users/users.component';
@@ -32,6 +38,8 @@ import { AddItemsTypeComponent } from './components/add-items-type/add-items-typ
 import { HomeComponent } from './components/home/home.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import { NotificationsServices } from './services/notifications.services';
+import { UpdateInvoiceComponent } from './components/update-invoice/update-invoice.component';
+import { InvoicesServices } from './services/invoices.services';
 
 
 @NgModule({
@@ -49,12 +57,17 @@ import { NotificationsServices } from './services/notifications.services';
     AddItemComponent,
     AddItemsTypeComponent,
     HomeComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    UpdateInvoiceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: "", component: HomeComponent, canActivate: [AuthGuard]},
       { path: "login", component: LoginComponent},
@@ -69,7 +82,9 @@ import { NotificationsServices } from './services/notifications.services';
       { path: "updateItem/:id", component: AddItemComponent, canActivate: [AuthGuard]},
       { path: "itemsTypes", component: TypesComponent, canActivate: [AuthGuard]},
       { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
-      { path: "updateItemsType/:id", component: AddItemsTypeComponent, canActivate: [AuthGuard]}
+      { path: "updateItemsType/:id", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
+      { path: "addInvoice", component: UpdateInvoiceComponent, canActivate: [AuthGuard]},
+      { path: "updateInvoice/:id", component: UpdateInvoiceComponent, canActivate: [AuthGuard]}
     ]),
     HttpModule,
     HttpClientModule,
@@ -82,7 +97,8 @@ import { NotificationsServices } from './services/notifications.services';
     MessageService,
     NotificationsServices,
     MainServices,
-    ItemsTypesServices
+    ItemsTypesServices,
+    InvoicesServices
   ],
   bootstrap: [AppComponent]
 })

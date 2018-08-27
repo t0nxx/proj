@@ -20,10 +20,10 @@
                 <th scope="row">{{index + 1}}</th>
                 <td>{{type.utype_name}}</td>
                 <td class="actions">
-                  <a (click)="deleteUserType(type.utype_id)">
+                  <a (click)="deleteUserType(type._id)">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
-                  <a routerLink="{{'/updateUserType/' + type.utype_id}}">
+                  <a routerLink="{{'/updateUserType/' + type._id}}">
                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                   </a>
                 </td>

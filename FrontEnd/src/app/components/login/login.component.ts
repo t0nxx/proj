@@ -34,10 +34,8 @@ export class LoginComponent implements OnInit {
       console.log(response);
       this.mess.showMessage("Success", "Login Success", "success");
       localStorage.setItem('currentUser', JSON.stringify(response));
-      this.main.setHeaders(localStorage.getItem("currentUser"))
-      setTimeout(() => {
-        this.router.navigateByUrl('/');
-      }, 2000);
+      this.main.setHeaders(localStorage.getItem("currentUser"));
+      this.router.navigateByUrl('/');
     }, err => {
       console.log(err.error);
       this.mess.showMessage("Error", err.error, "error");
