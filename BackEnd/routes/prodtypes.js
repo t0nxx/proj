@@ -18,7 +18,7 @@ router.get('/', Auth,async (req, res) => {
 })
 
 
-router.get('/deleteditemstype', Auth, async (req, res) => {
+router.get('/deletedprodtype', Auth, async (req, res) => {
     const result = await Products_types
         .find({ isDeleted: true });
     res.send(result);
