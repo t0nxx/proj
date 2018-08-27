@@ -41,7 +41,7 @@ export class AddUsersTypeComponent implements OnInit {
   }
 
   editUserType(type) {
-    this.main.PutRequest('userstypes/' + type.user_id, type).subscribe(res => {
+    this.main.PutRequest('userstypes/' + type._id, type).subscribe(res => {
       this.mess.showMessage("Success", "Edit type Done", "success");
     })
   }

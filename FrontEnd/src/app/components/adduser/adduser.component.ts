@@ -30,7 +30,7 @@ export class AdduserComponent implements OnInit {
       if (this.id !== undefined) {
         this.state = "Edit";
         this.getUserData(this.id);
-      } else if(this.id === undefined) {
+      } else if (this.id === undefined) {
         this.state = "Add";
         this.user = {
           name: "",
@@ -40,12 +40,12 @@ export class AdduserComponent implements OnInit {
           password: "",
           confirm: ""
         }
-      }else {
+      } else {
         this.router.navigateByUrl('/login');
       }
     })
   }
-  
+
   getUserData(id) {
     this.main.getRequest('users/' + id).subscribe(data => {
       this.user = data[0];
@@ -54,14 +54,18 @@ export class AdduserComponent implements OnInit {
   }
 
   editUser(user) {
-    this.main.PutRequest('users/' + user.user_id, user).subscribe(res => {
-      console.log(res);
-      this.mess.showMessage("Success", "Edit user Done", "success");
-    })
+    if (user.password === user.confirm) {
+      this.main.PutRequest('users/' + user.user_id, user).subscribe(res => {
+        console.log(res);
+        this.mess.showMessage("Success", "Edit user Done", "success");
+      })
+    } else {
+      this.mess.showMessage("Error", "Password and confirm password should be the same", "error");
+    }
   }
 
   addAndUpdateUser(user) {
-    if(user.password === user.confirm){
+    if (user.password === user.confirm) {
       delete user["confirm"];
       this.main.PostRequest('users', user).subscribe(res => {
         console.log(res);
@@ -78,12 +82,12 @@ export class AdduserComponent implements OnInit {
         console.log(err)
         this.mess.showMessage("Success", err.error, "error");
       });
-    }else {
+    } else {
       this.mess.showMessage("Error", "Password and confirm password should be the same", "error");
     }
   }
 
-  getUsersTypes(){
+  getUsersTypes() {
     this.main.getRequest('userstypes').subscribe(data => {
       this.types = data;
       console.log(data)
