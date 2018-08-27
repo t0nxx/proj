@@ -10,7 +10,13 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth , async (req, res) => {
     const result = await Users
-        .find();
+        .find({isDeleted : ! true});
+    res.send(result);
+})
+
+router.get('/deletedusers', Auth, async (req, res) => {
+    const result = await Users
+        .find({ isDeleted: true });
     res.send(result);
 })
 
@@ -21,7 +27,8 @@ router.get('/:id',Auth ,async (req, res) => {
     .aggregate([
 
             {$match: {
-                user_id: parseInt(query)
+                user_id: parseInt(query),
+                isDeleted : ! true
             }},
             {$lookup : {
                 from: "users_types",
@@ -82,15 +89,15 @@ router.delete('/:id', Auth,async (req, res) => {
     const query =await Users.findOne({ user_id: req.params.id });
     try {
         if (!query) return res.status(400).send('invalid user id')
-        await Users.remove(query);
-        res.json("removed");
+        await Users.update(query,{isDeleted : true});
+        res.json("isDeleted set to be true");
     } catch (error) {
         res.send(error.message);
     }
 
 })
 
-
+///
 
 // router.post('/login', async (req, res) => {
 
