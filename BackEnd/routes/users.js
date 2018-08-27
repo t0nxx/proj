@@ -21,30 +21,15 @@ router.get('/deletedusers', Auth, async (req, res) => {
 })
 
 router.get('/:id',Auth ,async (req, res) => {
-    const query = req.params.id ;
-    console.log(query);
-    const result = await Users
-    .aggregate([
-
-            {$match: {
-                user_id: parseInt(query),
-                isDeleted : ! true
-            }},
-            {$lookup : {
-                from: "users_types",
-                localField: "utype_id",    
-                foreignField: "utype_id", 
-                as: "usertype"
-            }},
-            {$unwind : '$usertype'},
-            {$project : {
-                'usertype._id' :0,
-                'usertype.utype_id': 0,
-                'usertype.__v': 0
-            }}
-
-        ]);
-    res.send(result);
+    const user = await Users.findOne({user_id:req.params.id,isDeleted :!true});
+    const utype = await Users_types.findOne({utype_id :user.utype_id});
+    res.send({
+        user_name: user.user_name,
+        name: user.name,
+        email: user.email,
+        utype_id: user.utype_id,
+        utype_name: utype.utype_name
+    });
 })
 
 router.post('/', Auth,async (req, res) => {
