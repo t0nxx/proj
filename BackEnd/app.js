@@ -3,8 +3,10 @@ const Joi = require("joi") ;
 const express = require("express") ;
 const cors = require('cors');
 const app = express () ;
-require('dotenv');
+require('dotenv/config');
 const mongoose = require('mongoose');
+
+// mongoose.connect(process.env.DATA_BASE)
 mongoose.connect('mongodb://localhost/ttt')
 .then(() => console.log('connected to db'))
 .catch(err => console.error('error', err));
