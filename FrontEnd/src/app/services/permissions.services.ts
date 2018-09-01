@@ -15,8 +15,11 @@ export class PermissionsServices {
     }
 
     getCurrentUserType() {
-        this.currentUserType = JSON.parse(localStorage.getItem("currentUser")).utype_name.toLowerCase();
-        return this.currentUserType;
+        if (localStorage.getItem("currentUser")) {
+            this.currentUserType = JSON.parse(localStorage.getItem("currentUser")).utype_name.toLowerCase();
+            return this.currentUserType;
+        }
+
     }
 
 }
