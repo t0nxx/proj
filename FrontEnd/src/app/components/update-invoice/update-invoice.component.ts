@@ -1,6 +1,7 @@
+import { PermissionsServices } from './../../services/permissions.services';
 import { NotificationsServices } from './../../services/notifications.services';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InvoicesServices } from '../../services/invoices.services';
 import { ItemsTypesServices } from '../../services/itemsTypes.services';
 import { ItemsServices } from '../../services/items.services';
@@ -19,14 +20,16 @@ export class UpdateInvoiceComponent implements OnInit {
   state;
   addItems = [];
   itemId = "";
-  currentUserType = localStorage.getItem("currentUser");
+  currentUserType = this.permissionsServices.getCurrentUserType();
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private mess: NotificationsServices,
     private invoiceServices: InvoicesServices,
     private typesServices: ItemsTypesServices,
-    private itemsServices: ItemsServices
+    private itemsServices: ItemsServices,
+    private permissionsServices: PermissionsServices
   ) {
     this.route.params.subscribe(param => {
       this.id = param.id;
@@ -36,6 +39,10 @@ export class UpdateInvoiceComponent implements OnInit {
         this.state = "Edit";
         this.getIvoiceData(this.id);
       } else {
+        console.log(this.currentUserType);
+        if (this.currentUserType === "account manager") {
+          this.router.navigateByUrl('/');
+        }
         this.state = "Add";
         this.invoice = {
           items: [],
@@ -63,6 +70,9 @@ export class UpdateInvoiceComponent implements OnInit {
   }
 
   editInvoice(invoice) {
+    if (this.currentUserType === 'account manager') {
+      invoice.account_manager_lock = true;
+    }
     this.invoiceServices.editInvoice(this.id, invoice).subscribe(res => {
       this.mess.showMessage("Success", "Edit invoice Done", "success");
     })
@@ -70,8 +80,10 @@ export class UpdateInvoiceComponent implements OnInit {
 
   addNewInvoice(invoice) {
     // console.log(invoice)
-    invoice.accountant_lock = false;
-    invoice.account_manager_lock = false;
+    if (this.currentUserType === 'accountant') {
+      invoice.accountant_lock = true;
+      invoice.account_manager_lock = false;
+    }
     this.invoiceServices.addNewInvoice(invoice).subscribe(res => {
       console.log(res)
       // this.invoice = {
@@ -102,26 +114,22 @@ export class UpdateInvoiceComponent implements OnInit {
   }
 
   getItems() {
-    let test = [
-      { pitem_id: 1, ptype_name: "test1" },
-      { pitem_id: 2, ptype_name: "test2" },
-      { pitem_id: 3, ptype_name: "test3" },
-      { pitem_id: 4, ptype_name: "test4" }
-    ]
-    this.items = test;
+    this.itemsServices.getAllItems().subscribe(data => {
+      this.items = data;
+    })
   }
 
   addNewItemToInvoice(itemID) {
     let items = this.items;
     for (let index = 0; index < items.length; index++) {
-      if (items[index].pitem_id == itemID) {
+      if (items[index].item_id == itemID) {
         let item = items[index];
         this.invoice.items.push({
-          item_id: item.pitem_id,
+          item_id: item.item_id,
           item_price: "",
           item_quantity: "",
           item_cost: "",
-          item_name: item.ptype_name,
+          item_name: item.item_name,
           item_description: item.item_description
         });
       }

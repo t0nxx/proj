@@ -94,3 +94,9 @@ button[type='submit']:focus {
     padding: 5px;
     cursor: all-scroll;
 }
+.disBg {
+    display: none !important;
+}
+.visHidden {
+    visibility: hidden;
+}

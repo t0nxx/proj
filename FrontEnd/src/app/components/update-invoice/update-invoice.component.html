@@ -9,26 +9,26 @@
         <div class="col-xs-12" *ngIf="state == 'Edit' && invoice">
           <div class="form-group">
             <label for="name">Invoice Name</label>
-            <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name">
+            <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="type">Invoice Type</label>
-            <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id">
+            <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
               <option value="">-- Please Select --</option>
               <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="data_from">Date (From)</label>
-            <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from">
+            <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="data_to">Date (to)</label>
-            <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to">
+            <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="price">Price (L.E)</label>
-            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price">
+            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="vat_percentage">Vat</label>
@@ -37,23 +37,23 @@
           </div>
           <div class="form-group">
             <label for="company_name">Company Name</label>
-            <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name" [(ngModel)]="invoice.company_name">
+            <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name" [(ngModel)]="invoice.company_name" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="client_name">Client Name</label>
-            <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name">
+            <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="client_phone">Client Phone</label>
-            <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone" [(ngModel)]="invoice.client_phone">
+            <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone" [(ngModel)]="invoice.client_phone" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="po_number">Po Number</label>
-            <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number">
+            <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div>
           <div class="form-group">
             <label for="items">Items</label>
-            <select name="items" class="form-control" id="items" (change)="addNewItemToInvoice(itemId)" [(ngModel)]="itemId">
+            <select name="items" class="form-control" id="items" (change)="addNewItemToInvoice(itemId)" [(ngModel)]="itemId" [disabled]="currentUserType !== 'admin'">
               <option value="">-- Please Select --</option>
               <option *ngFor="let item of items" value="{{item.pitem_id}}">{{item.ptype_name}}</option>
             </select>
@@ -63,11 +63,11 @@
             <span *ngFor="let addItem of invoice.items" class="addedItemBlock">
               <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromInvoice(addItem)"></i>
               <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_id" placeholder="Item ID" readonly>
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_name" placeholder="Item Name">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_description" placeholder="Item Description">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_cost" placeholder="Item Cost">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_quantity" placeholder="Item Quantity">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_price" placeholder="Item Price">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_name" placeholder="Item Name" [disabled]="currentUserType !== 'admin'">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_description" placeholder="Item Description" [disabled]="currentUserType !== 'admin'">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_cost" placeholder="Item Cost" [ngClass]="{'disBg': currentUserType !== 'admin'}" [disabled]="currentUserType !== 'admin'">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_quantity" placeholder="Item Quantity" [disabled]="currentUserType !== 'admin'">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_price" placeholder="Item Price" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </span>
           </div>
           <button type="submit" class="btn btn-default" (click)="editInvoice(invoice)">Edit</button>
@@ -77,26 +77,27 @@
         <div class="col-xs-12" *ngIf="state == 'Add'">
           <div class="form-group">
             <label for="name">Invoice Name</label>
-            <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name">
+            <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name" [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="type">Invoice Type</label>
-            <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id">
+            <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id" [disabled]="currentUserType !== 'admin'">
               <option value="">-- Please Select --</option>
               <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="data_from">Date (From)</label>
-            <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from">
+            <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from"
+              [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="data_to">Date (to)</label>
-            <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to">
+            <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to" [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="price">Price (L.E)</label>
-            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price">
+            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price" [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="vat_percentage">Vat</label>
@@ -105,25 +106,29 @@
           </div>
           <div class="form-group">
             <label for="company_name">Company Name</label>
-            <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name" [(ngModel)]="invoice.company_name">
+            <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name" [(ngModel)]="invoice.company_name"
+              [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="client_name">Client Name</label>
-            <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name">
+            <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name"
+              [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="client_phone">Client Phone</label>
-            <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone" [(ngModel)]="invoice.client_phone">
+            <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone" [(ngModel)]="invoice.client_phone"
+              [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="po_number">Po Number</label>
-            <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number">
+            <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number"
+              [disabled]="currentUserType !== 'admin'">
           </div>
           <div class="form-group">
             <label for="items">Items</label>
             <select name="items" class="form-control" id="items" (change)="addNewItemToInvoice(itemId)" [(ngModel)]="itemId">
               <option value="">-- Please Select --</option>
-              <option *ngFor="let item of items" value="{{item.pitem_id}}">{{item.ptype_name}}</option>
+              <option *ngFor="let item of items" value="{{item.item_id}}">{{item.item_name}}</option>
             </select>
           </div>
           <div class="form-group" *ngIf="invoice.items.length > 0">
@@ -131,11 +136,11 @@
             <span *ngFor="let addItem of invoice.items" class="addedItemBlock">
               <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromInvoice(addItem)"></i>
               <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_id" placeholder="Item ID" readonly>
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_name" placeholder="Item Name">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_description" placeholder="Item Description">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_cost" placeholder="Item Cost">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_quantity" placeholder="Item Quantity">
-              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_price" placeholder="Item Price">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_name" placeholder="Item Name" [disabled]="currentUserType !== 'accountant' && currentUserType !== 'admin'">
+              <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_description" placeholder="Item Description" [disabled]="currentUserType !== 'accountant' && currentUserType !== 'admin'">
+              <input type="number" class="form-control col-xs-12" [(ngModel)]="addItem.item_cost" placeholder="Item Cost" [disabled]="currentUserType !== 'accountant' && currentUserType !== 'admin'">
+              <input type="number" class="form-control col-xs-12" [(ngModel)]="addItem.item_quantity" placeholder="Item Quantity" [disabled]="currentUserType !== 'accountant' && currentUserType !== 'admin'">
+              <input type="number" class="form-control col-xs-12" [(ngModel)]="addItem.item_price" placeholder="Item Price" [disabled]="currentUserType !== 'admin'">
             </span>
           </div>
           <button type="submit" class="btn btn-default" (click)="addNewInvoice(invoice)">Add</button>

@@ -26,10 +26,10 @@
                 <td>{{invoice.company_name}}</td>
                 <td>{{invoice.po_number}}</td>
                 <td class="actions">
-                  <a (click)="deleteItem(invoice.inv_id)">
+                  <a (click)="deleteItem(invoice.inv_id)" [ngClass]="{'visHidden': currentUserType !== 'admin'}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
-                  <a routerLink="{{'/updateInvoice/' + invoice.inv_id}}">
+                  <a routerLink="{{'/updateInvoice/' + invoice.inv_id}}" [ngClass]="{'visHidden': currentUserType !== 'account manager' && currentUserType !== 'admin' && invoice.accountant_lock === true}">
                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                   </a>
                 </td>

@@ -48,14 +48,14 @@ export class AdduserComponent implements OnInit {
 
   getUserData(id) {
     this.main.getRequest('users/' + id).subscribe(data => {
-      this.user = data[0];
+      this.user = data;
       console.log(this.user);
     })
   }
 
   editUser(user) {
     if (user.password === user.confirm) {
-      this.main.PutRequest('users/' + user.user_id, user).subscribe(res => {
+      this.main.PutRequest('users/' + this.id, user).subscribe(res => {
         console.log(res);
         this.mess.showMessage("Success", "Edit user Done", "success");
       })

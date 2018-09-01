@@ -1,3 +1,4 @@
+import { PermissionsServices } from './../../services/permissions.services';
 import { Component, OnInit } from '@angular/core';
 import { NotificationsServices } from './../../services/notifications.services';
 import { InvoicesServices } from '../../services/invoices.services';
@@ -10,11 +11,14 @@ import { InvoicesServices } from '../../services/invoices.services';
 export class InvoicesComponent implements OnInit {
 
   invoices;
+  currentUserType = this.permissionsServices.getCurrentUserType();
 
   constructor(
     private mess: NotificationsServices,
-    private invoicesServices: InvoicesServices
+    private invoicesServices: InvoicesServices,
+    private permissionsServices: PermissionsServices
   ) {
+    console.log(this.currentUserType)
     this.getAllInvoices();
   }
 

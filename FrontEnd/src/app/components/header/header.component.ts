@@ -1,3 +1,4 @@
+import { PermissionsServices } from './../../services/permissions.services';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,8 +9,11 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  currentUserType = this.permissionsServices.getCurrentUserType();
+  
   constructor(
-    private router: Router
+    private router: Router,
+    private permissionsServices: PermissionsServices
   ) { }
 
   logOut() {

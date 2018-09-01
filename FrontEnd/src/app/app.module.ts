@@ -1,3 +1,4 @@
+import { PermissionsServices } from './services/permissions.services';
 import { ItemsTypesServices } from './services/itemsTypes.services';
 import { MainServices } from './services/main.services';
 import { MessageService } from 'primeng/components/common/messageservice';
@@ -101,7 +102,8 @@ import { InvoicesComponent } from './components/invoices/invoices.component';
     NotificationsServices,
     MainServices,
     ItemsTypesServices,
-    InvoicesServices
+    InvoicesServices,
+    PermissionsServices
   ],
   bootstrap: [AppComponent]
 })
