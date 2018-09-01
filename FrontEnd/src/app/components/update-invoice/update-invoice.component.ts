@@ -18,6 +18,8 @@ export class UpdateInvoiceComponent implements OnInit {
   id;
   state;
   addItems = [];
+  itemId = "";
+  currentUserType = localStorage.getItem("currentUser");
 
   constructor(
     private route: ActivatedRoute,
@@ -67,24 +69,29 @@ export class UpdateInvoiceComponent implements OnInit {
   }
 
   addNewInvoice(invoice) {
-    console.log(invoice)
+    // console.log(invoice)
+    invoice.accountant_lock = false;
+    invoice.account_manager_lock = false;
     this.invoiceServices.addNewInvoice(invoice).subscribe(res => {
-      this.invoice = {
-        items: [],
-        name: "",
-        type_id: "",
-        data_from: "",
-        data_to: "",
-        price: "",
-        vat_percentage: 14,
-        company_name: "",
-        client_name: "",
-        client_phone: "",
-        po_number: "",
-        accountant_lock: "",
-        account_manager_lock: ""
-      }
+      console.log(res)
+      // this.invoice = {
+      //   items: [],
+      //   name: "",
+      //   type_id: "",
+      //   data_from: "",
+      //   data_to: "",
+      //   price: "",
+      //   vat_percentage: 14,
+      //   company_name: "",
+      //   client_name: "",
+      //   client_phone: "",
+      //   po_number: "",
+      //   accountant_lock: "",
+      //   account_manager_lock: ""
+      // }
       this.mess.showMessage("Success", "Add invoice Done", "success");
+    }, error => {
+      console.log(error)
     });
   }
 
@@ -102,14 +109,9 @@ export class UpdateInvoiceComponent implements OnInit {
       { pitem_id: 4, ptype_name: "test4" }
     ]
     this.items = test;
-    // this.itemsServices.getAllItems().subscribe(data => {
-    //   this.items = data;
-    //   console.log(this.items);
-    // })
   }
 
   addNewItemToInvoice(itemID) {
-    console.log(itemID)
     let items = this.items;
     for (let index = 0; index < items.length; index++) {
       if (items[index].pitem_id == itemID) {
@@ -124,18 +126,17 @@ export class UpdateInvoiceComponent implements OnInit {
         });
       }
     }
+    this.itemId = "";
   }
 
-  removeItemFromInvoice(item){
+  removeItemFromInvoice(item) {
     let items = this.invoice.items;
     for (let index = 0; index < items.length; index++) {
       let oneitem = items[index];
-      if (oneitem.pitem_id === item.pitem_id) {
-        console.log(index);
+      if (oneitem.item_id === item.item_id) {
         items.splice(index, 1);
       }
     }
-    console.log(items);
   }
 
 

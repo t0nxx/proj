@@ -29,4 +29,8 @@ export class InvoicesServices {
         return this.main.PutRequest('invoices/' + id, invoice);
     }
 
+    deleteInvoice(id){
+        return this.main.DeleteRequest('invoices/' + id);
+    }
+
 }

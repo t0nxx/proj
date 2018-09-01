@@ -40,6 +40,7 @@ import { NotificationsComponent } from './components/notifications/notifications
 import { NotificationsServices } from './services/notifications.services';
 import { UpdateInvoiceComponent } from './components/update-invoice/update-invoice.component';
 import { InvoicesServices } from './services/invoices.services';
+import { InvoicesComponent } from './components/invoices/invoices.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { InvoicesServices } from './services/invoices.services';
     AddItemsTypeComponent,
     HomeComponent,
     NotificationsComponent,
-    UpdateInvoiceComponent
+    UpdateInvoiceComponent,
+    InvoicesComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ import { InvoicesServices } from './services/invoices.services';
       { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
       { path: "updateItemsType/:id", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
       { path: "addInvoice", component: UpdateInvoiceComponent, canActivate: [AuthGuard]},
-      { path: "updateInvoice/:id", component: UpdateInvoiceComponent, canActivate: [AuthGuard]}
+      { path: "updateInvoice/:id", component: UpdateInvoiceComponent, canActivate: [AuthGuard]},
+      { path: "invoices", component: InvoicesComponent, canActivate: [AuthGuard]}
     ]),
     HttpModule,
     HttpClientModule,

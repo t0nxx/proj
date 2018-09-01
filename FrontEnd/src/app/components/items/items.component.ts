@@ -1,6 +1,5 @@
 import { MainServices } from './../../services/main.services';
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
@@ -11,7 +10,6 @@ import { NotificationsServices } from './../../services/notifications.services';
 export class ItemsComponent implements OnInit {
 
   items;
-  msgs: Message[] = [];
 
   constructor(
     private main: MainServices,
@@ -29,10 +27,9 @@ export class ItemsComponent implements OnInit {
 
   deleteItem(item_id){
     this.main.DeleteRequest('items/' + item_id).subscribe(res => {
-      // console.log(res);
+      this.mess.showMessage("Success", "Delete item Done", "warn");
+      this.getAllItems();
     });
-    this.mess.showMessage("Success", "Delete item Done", "warn");
-    this.getAllItems();
   }
 
   ngOnInit() {
