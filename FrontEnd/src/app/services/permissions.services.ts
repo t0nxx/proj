@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class PermissionsServices {
 
     currentUserType: string;
+    currentUserName: string;
 
     constructor(
         private main: MainServices
@@ -19,7 +20,13 @@ export class PermissionsServices {
             this.currentUserType = JSON.parse(localStorage.getItem("currentUser")).utype_name.toLowerCase();
             return this.currentUserType;
         }
+    }
 
+    getCurrentUserName(){
+        if (localStorage.getItem("currentUser")) {
+            this.currentUserName = JSON.parse(localStorage.getItem("currentUser")).name;
+            return this.currentUserName;
+        }
     }
 
 }

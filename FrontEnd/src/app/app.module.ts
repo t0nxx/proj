@@ -42,6 +42,7 @@ import { NotificationsServices } from './services/notifications.services';
 import { UpdateInvoiceComponent } from './components/update-invoice/update-invoice.component';
 import { InvoicesServices } from './services/invoices.services';
 import { InvoicesComponent } from './components/invoices/invoices.component';
+import { HomeServices } from './services/home.services';
 
 
 @NgModule({
@@ -103,7 +104,8 @@ import { InvoicesComponent } from './components/invoices/invoices.component';
     MainServices,
     ItemsTypesServices,
     InvoicesServices,
-    PermissionsServices
+    PermissionsServices,
+    HomeServices
   ],
   bootstrap: [AppComponent]
 })
