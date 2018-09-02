@@ -10,7 +10,6 @@ import { NotificationsServices } from './../../services/notifications.services';
 })
 export class NotificationsComponent implements OnInit {
 
-
   constructor() { }
 
   ngOnInit() {

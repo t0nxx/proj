@@ -1,7 +1,6 @@
 import { MainServices } from './../../services/main.services';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/components/common/api';
 import { NotificationsServices } from './../../services/notifications.services';
 
 @Component({
@@ -11,8 +10,9 @@ import { NotificationsServices } from './../../services/notifications.services';
 })
 export class LoginComponent implements OnInit {
 
-  msgs: Message[] = [];
-
+  user_name;
+  password;
+  
   constructor(
     private router: Router,
     private main: MainServices,
@@ -25,12 +25,8 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(user_name, password) {
-    let body = {
-      user_name: user_name,
-      password: password
-    }
-    this.main.PostRequest('login', body).subscribe(response => {
+  login() {
+    this.main.PostRequest('login', {user_name: this.user_name, password: this.password}).subscribe(response => {
       console.log(response);
       this.mess.showMessage("Success", "Login Success", "success");
       localStorage.setItem('currentUser', JSON.stringify(response));
