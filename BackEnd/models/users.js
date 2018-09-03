@@ -38,6 +38,12 @@ const users_schema = new mongoose.Schema({
         type : Boolean ,
         default : false
     }
+}, { toJSON: { virtuals: true } });
+users_schema.virtual('utypename' , {
+    ref : 'Users_types' ,
+    localField: 'utype_id' ,
+    foreignField: 'utype_id', 
+    options: { select: { utype_name :1 , _id : 0 } }
 });
 
 const Users = mongoose.model('Users', users_schema);

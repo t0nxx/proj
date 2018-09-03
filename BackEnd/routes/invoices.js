@@ -10,7 +10,8 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth,async (req, res) => {
     const result = await Invoices
-        .find({isDeleted : !true});
+        .find({isDeleted : !true})
+        .populate('invtype');
     res.send(result);
 })
 

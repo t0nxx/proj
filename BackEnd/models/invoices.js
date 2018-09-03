@@ -12,7 +12,7 @@ const invoices_schema = new mongoose.Schema({
     company_name: String,
     client_name: String,
     client_phone: String,
-    po_Number: String,
+    po_number: String,
     accountant_lock: Boolean,
     account_manager_lock: Boolean,
     items: [{}],
@@ -20,7 +20,14 @@ const invoices_schema = new mongoose.Schema({
         type: Boolean,
         default: false
     }
-});
+},{toJSON : {virtuals: true}});
+
+invoices_schema.virtual('invtype', {
+    ref: 'Products_types',
+    localField: 'type_id',
+    foreignField: 'ptype_id',
+    options: { select: { ptype_name: 1, _id: 0 } }
+})
 const Invoices = mongoose.model('Invoices', invoices_schema);
 invoices_schema.plugin(AutoIncrement, { inc_field: 'inv_id' })
 

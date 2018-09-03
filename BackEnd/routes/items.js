@@ -9,7 +9,8 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth,async (req, res) => {
         const result = await Items
-        .find({isDeleted : ! true});
+        .find({isDeleted : ! true})
+        .populate('itemtype');
         res.send(result);
 })
 

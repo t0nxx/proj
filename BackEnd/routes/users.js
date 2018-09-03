@@ -9,15 +9,19 @@ const Auth = require('../middlewars/auth');
 
 
 router.get('/', Auth , async (req, res) => {
-    const result = await Users
-        .find({isDeleted : ! true});
-    res.send(result);
+    const user = await Users
+        .findOne({ isDeleted: ! true })
+        .populate('utypename')
+        .select('user_name email name utype_id utypename ')
+        .exec();
+    res.send(user);
+    // user.utypename[0].utype_name
 })
 
 router.get('/deletedusers', Auth, async (req, res) => {
     const result = await Users
         .find({ isDeleted: true });
-    res.send(result);
+    res.json(result);
 })
 
 router.get('/:id',Auth ,async (req, res) => {
@@ -61,6 +65,10 @@ router.put('/:id', Auth,async (req, res) => {
     const query = await Users.findOne({ user_id: req.params.id });
     try {
         if(!query) return res.status(400).send('invalid user id');
+        if(req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            updated.password = await bcrypt.hash(updated.password , salt);
+        }
         await Users.update(query, updated);
         res.json("updated");
     } catch (error) {
@@ -81,44 +89,6 @@ router.delete('/:id', Auth,async (req, res) => {
     }
 
 })
-
-///
-
-// router.post('/login', async (req, res) => {
-
-//     try {
-//         const user = await Users.findOne({ email: req.body.email });
-//         if (!user) return res.status(400).send("wrong email");
-
-//         if (!req.body.password) return res.status(400).send("password is required")
-//         const valid = await bcrypt.compare(req.body.password, user.password);
-//         if (!valid) return res.status(400).send("wrong password");
-//         const token = jwt.sign({ email: user.email }, process.env.JWT_KEY, {
-//             expiresIn: "1h"
-//         });
-        
-//         res.send({
-//             name : user.name,
-//             email : user.email,
-//             utype_id : user.utype_id ,
-//             token : token
-//         });
-        
-//     } catch (error) {
-//         res.send(error.message);
-//     }
-    
-// })
-
-
-
-
-
-
-
-
-
-
 
 
 
