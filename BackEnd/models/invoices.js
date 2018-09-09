@@ -12,9 +12,18 @@ const invoices_schema = new mongoose.Schema({
     company_name: String,
     client_name: String,
     client_phone: String,
+    client_title: String,
     po_number: String,
+    sub_total: Number,
+    total: Number,
+    note: String,
+    serial : String ,
     accountant_lock: Boolean,
     account_manager_lock: Boolean,
+    paid : {
+        type : Boolean ,
+        default : false
+    },
     items: [{}],
     isDeleted: {
         type: Boolean,

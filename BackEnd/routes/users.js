@@ -10,7 +10,7 @@ const Auth = require('../middlewars/auth');
 
 router.get('/', Auth , async (req, res) => {
     const user = await Users
-        .findOne({ isDeleted: ! true })
+        .find({ isDeleted: ! true })
         .populate('utypename')
         .select('user_name email name utype_id utypename ')
         .exec();
