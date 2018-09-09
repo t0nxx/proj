@@ -5,10 +5,8 @@ const mongoose = require('mongoose');
 const Invoices = require('../models/invoices') ;
 const padStart = require('string.prototype.padstart');
 const schedule = require('node-schedule');
+const sendmail = require('../models/mail');
 const Auth = require('../middlewars/auth');
-
-
-
 
 router.get('/', Auth,async (req, res) => {
     const result = await Invoices
@@ -65,15 +63,13 @@ router.post('/', Auth,async (req, res) => {
         });
 
         // for test console.log(invoice);
-        // job will start every 5 sec now
+        // job will start every 20 sec now
         //the requirements is to be starts every week at production
-        await schedule.scheduleJob('*/5 * * * * *', function () {
+        await schedule.scheduleJob('*/20 * * * * *', function () {
             if (invoice.paid != true){
             console.log('invoiced not paid');
             /// here i will set the mailler inshallah :D
-            //
-            //
-            ///
+               // sendmail();
             ////
             }
         });
