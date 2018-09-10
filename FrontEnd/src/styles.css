@@ -75,7 +75,7 @@ button[type='submit']:focus {
     position: absolute;
     padding: 2px 5px;
     border-radius: 3px;
-    top: 14px;
+    top: 5px;
     right: 9px;
     z-index: 9;
     width: 25px;

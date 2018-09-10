@@ -54,10 +54,13 @@ export class UpdateInvoiceComponent implements OnInit {
           vat_percentage: 14,
           company_name: "",
           client_name: "",
+          client_title: "",
           client_phone: "",
           po_number: "",
           accountant_lock: "",
-          account_manager_lock: ""
+          account_manager_lock: "",
+          sub_total: 0,
+          total: 0
         }
       }
     })
@@ -82,6 +85,9 @@ export class UpdateInvoiceComponent implements OnInit {
     // console.log(invoice)
     if (this.currentUserType === 'accountant') {
       invoice.accountant_lock = true;
+      invoice.account_manager_lock = false;
+    }else {
+      invoice.accountant_lock = false;
       invoice.account_manager_lock = false;
     }
     this.invoiceServices.addNewInvoice(invoice).subscribe(res => {
@@ -130,7 +136,10 @@ export class UpdateInvoiceComponent implements OnInit {
           item_quantity: "",
           item_cost: "",
           item_name: item.item_name,
-          item_description: item.item_description
+          item_description: item.item_description,
+          quantity_type: "",
+          item_totalcost: 0,
+          item_totalprice: 0
         });
       }
     }
@@ -145,6 +154,22 @@ export class UpdateInvoiceComponent implements OnInit {
         items.splice(index, 1);
       }
     }
+  }
+
+  sumTotals(item) {
+    // sum total price
+    item.item_totalprice = item.item_price * item.item_quantity;
+    // sum total cost
+    item.item_totalcost = item.item_cost * item.item_quantity;
+    // sum sub total && total
+    let items = this.invoice.items;
+    this.invoice.sub_total = 0;
+    this.invoice.total = 0;
+    for (let index = 0; index < items.length; index++) {
+      this.invoice.sub_total += items[index].item_totalprice;
+    }
+    let vatAmoutn = ((this.invoice.sub_total * this.invoice.vat_percentage) / 100);
+    this.invoice.total += this.invoice.sub_total - vatAmoutn;
   }
 
 

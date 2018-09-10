@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li class="active"><a routerLink="/">Home <span class="sr-only">(current)</span></a></li>
-          <li class="dropdown" [ngClass]="{'disBg': currentUserType !== 'admin'}">
+          <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a routerLink="/users">View All Users</a></li>
@@ -25,7 +25,7 @@
               <li><a routerLink="/addUserType">Add Users Type</a></li>
             </ul>
           </li>
-          <li class="dropdown" [ngClass]="{'disBg': currentUserType !== 'admin'}">
+          <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Items <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a routerLink="/items">View All Items</a></li>
@@ -38,7 +38,7 @@
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Invoices <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <li><a routerLink="/invoices">View All Invoices</a></li>
-              <li><a routerLink="/addInvoice" [ngClass]="{'disBg': currentUserType !== 'accountant' && currentUserType !== 'admin'}">Add Invoice</a></li>
+              <li><a routerLink="/addInvoice">Add Invoice</a></li>
             </ul>
           </li>
         </ul>

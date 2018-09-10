@@ -9,6 +9,7 @@
             <thead class="black white-text">
               <tr>
                 <th scope="col">ID</th>
+                <th scope="col">Serial</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
@@ -20,8 +21,9 @@
             <tbody>
               <tr *ngFor="let invoice of invoices; let index = index">
                 <th scope="row">{{index + 1}}</th>
+                <th scope="row">{{invoice.serial}}</th>
                 <td>{{invoice.name}}</td>
-                <td>{{invoice.typename}}</td>
+                <td>{{invoice.invtype[0].ptype_name}}</td>
                 <td>From <span>{{invoice.data_from}}</span> To <span>{{invoice.data_to}}</span></td>
                 <td>{{invoice.company_name}}</td>
                 <td>{{invoice.po_number}}</td>
