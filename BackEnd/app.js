@@ -19,6 +19,7 @@ const ProductTypeRoute = require('./routes/prodtypes');
 const Quotations = require('./routes/quotation');
 const AuthRoute = require('./routes/auth');
 const LoginRoute = require('./routes/login');
+const CreatePdf = require('./routes/createpdf');
 
 app.use(express.json());
 app.use(cors());
@@ -30,6 +31,7 @@ app.use('/prodtypes',    ProductTypeRoute ) ;
 app.use('/quotations' , Quotations);
 app.use('/auth' , AuthRoute );
 app.use('/login' , LoginRoute);
+app.use('/createpdf' , CreatePdf);
 
 
 

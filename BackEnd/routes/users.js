@@ -12,7 +12,7 @@ router.get('/', Auth , async (req, res) => {
     const user = await Users
         .find({ isDeleted: ! true })
         .populate('utypename')
-        .select('user_name email name utype_id utypename ')
+        .select('user_id user_name email name utype_id utypename ')
         .exec();
     res.send(user);
     // user.utypename[0].utype_name

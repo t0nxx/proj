@@ -2,11 +2,16 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require('mongoose');
+const fs = require('fs');
+const ejs = require('ejs');
+const pdf = require('html-pdf');
 const Invoices = require('../models/invoices') ;
 const padStart = require('string.prototype.padstart');
 const schedule = require('node-schedule');
 const sendmail = require('../models/mail');
 const Auth = require('../middlewars/auth');
+const compiled = ejs.compile(fs.readFileSync('./invoice_templete/Q3.ejs', 'utf-8'));
+
 
 router.get('/', Auth,async (req, res) => {
     const result = await Invoices
@@ -34,13 +39,31 @@ router.get('/:id', Auth,async (req, res) => {
     res.send(result);
 })
 
+router.get('/createpdf/:id',  async (req, res) => {
+    const query = { inv_id: req.params.id, isDeleted: !true };
+    const result = await Invoices
+        .find(query);
+    try {
+        if (result){
+        const html = compiled({name : result[0].name});
+            await pdf.create(html).toFile('./outpdf/invoice.pdf', function (err, ress) {
+                if (err) return console.log(err);
+                console.log(ress);
+                res.sendFile(ress.filename);
+            });
+        }
+        
+    } catch (error) {
+        res.send(error.message);
+    }
+})
+
 router.post('/', Auth,async (req, res) => {
     const invoice = new Invoices({
         name: req.body.name,
         type_id: req.body.type_id,
         data_from: req.body.data_from,
         data_to: req.body.data_to,
-        price: req.body.price,
         vat_percentage: req.body.vat_percentage,
         company_name: req.body.company_name,
         client_name: req.body.client_name,
