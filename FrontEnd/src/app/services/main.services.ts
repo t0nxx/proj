@@ -11,7 +11,7 @@ import { NotificationsServices } from './notifications.services';
 })
 export class MainServices {
 
-    // url = "http://localhost:3000/";
+   // url = "http://localhost:3000/";
     url = "https://testfordeg.herokuapp.com/"; // production
     currentUser;
 
