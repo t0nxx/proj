@@ -1,0 +1,89 @@
+/**
+  * Name: UNC
+  * Version: 1.0
+  * Author: Themesflat
+  * Author URI: http://www.themesflat.com
+*/
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.mainContainer {
+  width: 1200px !important;
+  position: relative;
+}
+.mainContainer .bg {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.mainContainer .headOfInvoice {
+  margin-top: 250px;
+  text-align: center;
+}
+.mainContainer .headOfInvoice p {
+  font-size: 19px;
+  text-transform: capitalize;
+}
+.mainContainer .headOfInvoice p span {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.invliceItems {
+  margin-top: 50px;
+}
+.invliceItems table thead tr th {
+  background: #c24891;
+  border-radius: 50px;
+  color: white;
+}
+.invliceItems table thead > tr > th {
+  border-bottom: 0;
+}
+.invliceItems table thead > tr > th,
+.invliceItems table tbody > tr > td,
+.invliceItems table tfoot > tr > td {
+  border: 0;
+}
+.invliceItems table tbody > tr > td,
+.invliceItems table tfoot > tr > td {
+  border-bottom: 1pt solid #c24891;
+  font-size: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.invliceItems table tfoot > tr > td {
+  color: white;
+  background: #c24891;
+  font-weight: bold;
+  border-radius: 50px;
+  border: 0;
+  font-size: 20px;
+
+}
+.invoiceFooter {
+  text-align: center;
+  margin-top: 50px;
+}
+.invoiceFooter p {
+  font-size: 18px;
+  font-weight: bold;
+}
+.invoiceFooter ul {
+  /* padding: 0; */
+  margin: 0;
+  text-align: left;
+  margin-top: 30px;
+}
+.invoiceFooter ul li {
+  list-style-type: decimal;
+  font-size: 16px;
+}
+.invoiceFooter .thanksText {
+  margin-top: 50px;
+}
+.finishInvoice  {
+  margin-top: 50px;
+}

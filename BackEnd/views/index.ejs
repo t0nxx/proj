@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="container mainContainer">
+
+        <img src="/img/bg.jpg" class="bg" alt="">
+
+        <div class="row headOfInvoice">
+            <div class="col-xs-12">
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <!--                        client name-->
+                        <p>Client:
+                            <span>
+                                <%= invoice.client_name %>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <!--                        invoice/qoutation number-->
+                        <p>quotation number:
+                            <span>
+                                <%= invoice.serial %>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <!--                        invoice/qoutation name-->
+                        <p>Job:
+                            <span>
+                                <%= invoice.name %>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-xs-6">
+                        <!--                        invoice/qoutation date from-->
+                        <p>Date:
+                            <span>
+                                <%= invoice.date_from %>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row invliceItems">
+            <div class="col-xs-12">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-12">
+
+                            <table class="table col-xs-12">
+                                <thead>
+                                    <tr>
+                                        <th>Element</th>
+                                        <th>Description</th>
+                                        <th>QTY</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (var i = 0; i < invoice.items.length; i++) { %>
+                                        <tr>
+                                            <td>
+                                                <%= invoice.items[i].item_name %>
+                                            </td>
+                                            <td>
+                                                <%= invoice.items[i].item_description %>
+                                            </td>
+                                            <td>
+                                                <%= invoice.items[i].item_quantity %>
+                                            </td>
+                                            <td>
+                                                <%= invoice.items[i].item_cost %>
+                                            </td>
+                                            <td>
+                                                <%= invoice.items[i].item_price %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                                <tfoot>
+                                    <!--                                    sub total in invoice only-->
+                                    <tr>
+                                        <td colspan="3">Sub Total</td>
+                                        <td colspan="2">
+                                            <%= invoice.sub_total %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Total</td>
+                                        <td colspan="2">
+                                            <%= invoice.total %>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row invoiceFooter">
+            <div class="col-xs-12">
+                <p>Total not including price of unit elements highlighted till quantity determination</p>
+            </div>
+            <div class="col-xs-12">
+                <ul>
+                    <li>This quotation is valid for only a week. The agency pertains its right to withdraw the quotation and
+                        validate the prices after this period</li>
+                    <li>Cancellation fees for job is charged 50% if cancelled before finalization,100% if cancelled after finalization
+                        stage.
+                    </li>
+                    <li>Accept 10% +/- from the required quantity.</li>
+                    <li>Accept 6% +/- deviation from the delivered materials.</li>
+                    <li>Payment Terms will be as follows: 50% down payment & 50% with delivery.</li>
+                    <li>Total excluding VAT.</li>
+                </ul>
+            </div>
+            <div class="col-xs-12 thanksText">
+                <p>Thank You for your business</p>
+            </div>
+        </div>
+
+        <div class="row finishInvoice">
+            <div class="col-xs-12">
+                <div class="col-xs-12">
+                    <div class="col-xs-12">
+                        <div class="col-xs-12">
+                            <div class="col-xs-12">
+                                <div class="col-xs-12">
+                                    <div class="col-xs-12">
+
+                                        <div class="row">
+                                            <div class="col-xs-6 text-left">
+                                                <p>Acceptance date:-------------------</p>
+                                            </div>
+                                            <div class="col-xs-6 text-right">
+                                                <p>Signature:-------------------------</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
