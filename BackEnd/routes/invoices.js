@@ -34,7 +34,7 @@ router.get("/:id", Auth, async (req, res) => {
 });
 
 router.get("/createpdf/:id", async (req, res) => {
-  const query = { inv_id: req.params.id, isDeleted: !true };
+  const query = { serial: req.params.id, isDeleted: !true };
   const result = await Invoices.find(query);
   try {
     if (result) {
@@ -49,8 +49,8 @@ router.get("/createpdf/:id", async (req, res) => {
         .toFile("./outpdf/invoice.pdf", function(err, ress) {
           if (err) return console.log(err);
           console.log(ress);
-          console.log(result[0].items.length);
           res.sendFile(ress.filename);
+          //for testing
           // res.render("index.ejs", { invoice: result[0] });
         });
     }
