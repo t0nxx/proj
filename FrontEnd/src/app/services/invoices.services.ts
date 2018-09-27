@@ -1,36 +1,33 @@
-import { MainServices } from './main.services';
-import { Injectable } from '@angular/core';
+import { MainServices } from "./main.services";
+import { Injectable } from "@angular/core";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: "root"
 })
 export class InvoicesServices {
+  constructor(private main: MainServices) {}
 
+  getInvoice(id) {
+    return this.main.getRequest("invoices/" + id);
+  }
 
-    constructor(
-        private main: MainServices
-    ) {
+  getAllInvoices() {
+    return this.main.getRequest("invoices");
+  }
 
-    }
+  addNewInvoice(invoice) {
+    return this.main.PostRequest("invoices", invoice);
+  }
 
-    getInvoice(id){
-        return this.main.getRequest('invoices/' + id);
-    }
+  editInvoice(id, invoice) {
+    return this.main.PutRequest("invoices/" + id, invoice);
+  }
 
-    getAllInvoices() {
-        return this.main.getRequest('invoices');
-    }
+  deleteInvoice(id) {
+    return this.main.DeleteRequest("invoices/" + id);
+  }
 
-    addNewInvoice(invoice) {
-        return this.main.PostRequest('invoices', invoice);
-    }
-
-    editInvoice(id, invoice) {
-        return this.main.PutRequest('invoices/' + id, invoice);
-    }
-
-    deleteInvoice(id){
-        return this.main.DeleteRequest('invoices/' + id);
-    }
-
+  export() :any {
+    return this.main.getPdfResponse();
+  }
 }

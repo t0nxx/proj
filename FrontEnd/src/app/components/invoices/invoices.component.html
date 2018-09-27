@@ -23,7 +23,7 @@
                 <th scope="row">{{index + 1}}</th>
                 <th scope="row">{{invoice.serial}}</th>
                 <td>{{invoice.name}}</td>
-                <td>{{invoice.invtype[0].ptype_name}}</td>
+                <td>{{invoice.invtype[0]?.ptype_name}}</td>
                 <td>From <span>{{invoice.data_from}}</span> To <span>{{invoice.data_to}}</span></td>
                 <td>{{invoice.company_name}}</td>
                 <td>{{invoice.po_number}}</td>
@@ -31,8 +31,11 @@
                   <a (click)="deleteInvoice(invoice.inv_id)" [ngClass]="{'visHidden': currentUserType !== 'admin'}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </a>
-                  <a routerLink="{{'/updateInvoice/' + invoice.inv_id}}" [ngClass]="{'visHidden': currentUserType !== 'account manager' && currentUserType !== 'admin' && invoice.accountant_lock === true}">
+                  <a routerLink="{{'/updateInvoice/' + invoice.inv_id}}" [ngClass]="{'visHidden': currentUserType !== 'account manager' && currentUserType !== 'admin'}">
                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                  </a>
+                  <a [ngClass]="{'visHidden': invoice.paid !== true}" (click)="exportInvoice(invoice)">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   </a>
                 </td>
               </tr>
