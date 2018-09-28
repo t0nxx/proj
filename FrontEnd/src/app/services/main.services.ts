@@ -11,7 +11,7 @@ import { NotificationsServices } from './notifications.services';
 })
 export class MainServices {
 
-   // url = "http://localhost:3000/";
+    // url = "http://localhost:3000/";
     url = "https://testfordeg.herokuapp.com/"; // production
     currentUser;
 
@@ -21,18 +21,17 @@ export class MainServices {
         private router: Router,
         private mess: NotificationsServices
     ) {
-
         this.getToken();
     }
 
-    ifTokenExpired(err){
-        // console.log(err);
-        if(typeof err === "string"){
-            if(err.includes("invalid") || err.includes("denied") || err.includes("Unauthorized")){
+    ifTokenExpired(err) {
+        console.log(err);
+        if (typeof err === "string") {
+            if (err.includes("invalid") || err.includes("denied") || err.includes("Unauthorized")) {
                 localStorage.removeItem("currentUser");
                 this.router.navigateByUrl('/login');
             }
-        }else {
+        } else {
             console.log(err.text);
             this.mess.showMessage("Main Services", err.text, "error");
         }
@@ -47,12 +46,19 @@ export class MainServices {
         }
     }
 
-    setHeaders(user) {
+    setHeaders(user, pdfres?) {
         let token = JSON.parse(user).token;
         // console.log(token);
-        this.headers = new HttpHeaders()
-            .set("auth-token", token)
-            .set("Content-Type", "application/json");
+        if(!pdfres){
+            this.headers = new HttpHeaders()
+                .set("auth-token", token)
+                .set("Content-Type", "application/json");
+        }else {
+            this.headers = new HttpHeaders()
+                .set("auth-token", token)
+                .set("responseType", "ResponseContentType.Blob")
+                .set("Content-Type", "application/json");
+        }
     }
 
     getRequest(route) {
@@ -68,31 +74,35 @@ export class MainServices {
     PostRequest(route, body) {
         let newRoute = this.url + route;
         return this.http.post(newRoute, body, { headers: this.headers })
-        .pipe(catchError((error, caught) => {
-            // console.log("error", error);
-            this.ifTokenExpired(error.error);
-            return throwError(error);
-        })) as any;
+            .pipe(catchError((error, caught) => {
+                // console.log("error", error);
+                this.ifTokenExpired(error.error);
+                return throwError(error);
+            })) as any;
     }
 
     PutRequest(route, body) {
         let newRoute = this.url + route;
         return this.http.put(newRoute, body, { headers: this.headers })
-        .pipe(catchError((error, caught) => {
-            // console.log("error", error);
-            this.ifTokenExpired(error.error);
-            return throwError(error);
-        })) as any;
+            .pipe(catchError((error, caught) => {
+                // console.log("error", error);
+                this.ifTokenExpired(error.error);
+                return throwError(error);
+            })) as any;
     }
 
     DeleteRequest(route) {
         let newRoute = this.url + route;
         return this.http.delete(newRoute, { headers: this.headers })
-        .pipe(catchError((error, caught) => {
-            // console.log("error", error);
-            this.ifTokenExpired(error.error);
-            return throwError(error);
-        })) as any;
+            .pipe(catchError((error, caught) => {
+                // console.log("error", error);
+                this.ifTokenExpired(error.error);
+                return throwError(error);
+            })) as any;
+    }
+
+    getPdfResponse(){
+        return this.url;
     }
 
     handleError() {
