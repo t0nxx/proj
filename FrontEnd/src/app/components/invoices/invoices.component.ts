@@ -36,26 +36,11 @@ export class InvoicesComponent implements OnInit {
   }
 
   exportInvoice(invoice) {
-    // console.log(this.invoicesServices.export())
     var url =
-      this.invoicesServices.export() + "invoices/createpdf/" + invoice.inv_id;
+      this.invoicesServices.export() + "invoices/createpdf/" + invoice.serial;
     var win = window.open(url, "_blank");
     win.focus();
-    // this.invoicesServices.export(invoice.inv_id).subscribe(res => {
-    //   console.log("res", res)
-    //     res = new Blob([res.blob()], { type: "application/pdf" });
-    //     var pdfUrl = URL.createObjectURL(res);
-    //     var uri = 'data:text/pdf;charset=utf-8,' + escape(res);
-    //     var linkpdf = document.createElement("a");
-    //     linkpdf.href = pdfUrl;
-    //     // linkpdf.style = "visibility:hidden";
-    //     linkpdf.download = "x.pdf";
-    //     document.body.appendChild(linkpdf);
-    //     linkpdf.click();
-    //     document.body.removeChild(linkpdf);
-    //   }
-    // );
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

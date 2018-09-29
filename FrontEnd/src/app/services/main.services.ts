@@ -49,11 +49,11 @@ export class MainServices {
     setHeaders(user, pdfres?) {
         let token = JSON.parse(user).token;
         // console.log(token);
-        if(!pdfres){
+        if (!pdfres) {
             this.headers = new HttpHeaders()
                 .set("auth-token", token)
                 .set("Content-Type", "application/json");
-        }else {
+        } else {
             this.headers = new HttpHeaders()
                 .set("auth-token", token)
                 .set("responseType", "ResponseContentType.Blob")
@@ -101,7 +101,7 @@ export class MainServices {
             })) as any;
     }
 
-    getPdfResponse(){
+    getPdfResponse() {
         return this.url;
     }
 

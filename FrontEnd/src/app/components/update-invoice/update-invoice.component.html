@@ -25,13 +25,13 @@
               </select>
             </div>
             <div class="form-group col-sm-6">
-              <label for="data_from">Date (From)</label>
-              <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from"
+              <label for="date_from">Date (From)</label>
+              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="invoice.date_from"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
-              <label for="data_to">Date (to)</label>
-              <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to"
+              <label for="date_to">Date (to)</label>
+              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="invoice.date_to"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <!-- <div class="form-group col-sm-6">
@@ -142,7 +142,9 @@
               <label for="note">Note</label>
               <textarea name="note" id="note" class="form-control" id="note" [(ngModel)]="invoice.note"></textarea>
             </div>
-            <button type="submit" class="btn btn-default" (click)="editInvoice(invoice)">Edit</button>
+            <div class="col-xs-12">
+              <button type="submit" class="btn btn-default" (click)="editInvoice(invoice)">Edit</button>
+            </div>
           </div>
         </div>
 
@@ -162,13 +164,13 @@
               </select>
             </div>
             <div class="form-group col-sm-6">
-              <label for="data_from">Date (From)</label>
-              <input autocomplete="no" name="data_from" type="date" class="form-control" id="data_from" [(ngModel)]="invoice.data_from"
+              <label for="date_from">Date (From)</label>
+              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="invoice.date_from"
                 [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
-              <label for="data_to">Date (to)</label>
-              <input autocomplete="no" name="data_to" type="date" class="form-control" id="data_to" [(ngModel)]="invoice.data_to"
+              <label for="date_to">Date (to)</label>
+              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="invoice.date_to"
                 [disabled]="currentUserType !== 'admin'">
             </div>
             <!-- <div class="form-group col-sm-6">
@@ -273,7 +275,9 @@
                 <input name="total" type="number" class="form-control" id="total" [(ngModel)]="invoice.total" readonly>
               </div>
             </div>
-            <button type="submit" class="btn btn-default" (click)="addNewInvoice(invoice)">Add</button>
+            <div class="col-xs-12">
+              <button type="submit" class="btn btn-default" (click)="addNewInvoice(invoice)">Add</button>
+            </div>
           </div>
         </div>
 
