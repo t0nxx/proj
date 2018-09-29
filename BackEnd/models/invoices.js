@@ -5,7 +5,10 @@ const invoices_schema = new mongoose.Schema(
   {
     inv_id: Number,
     name: String,
-    type_id: Number,
+    type_id: {
+      type: Number,
+      default: 0
+    },
     date_from: String,
     date_to: String,
     vat_percentage: String,
