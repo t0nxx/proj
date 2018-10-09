@@ -13,7 +13,9 @@ const Auth = require("../middlewars/auth");
 const compiled = ejs.compile(fs.readFileSync("./views/index.ejs", "utf-8"));
 
 router.get("/", Auth, async (req, res) => {
-  const result = await Invoices.find({ isDeleted: !true }).populate("invtype");
+  const result = await Invoices.find({ isDeleted: !true })
+    .populate("invtype")
+    .populate("createdBy");
   res.send(result);
 });
 
@@ -23,13 +25,17 @@ router.get("/deletedinvoices", Auth, async (req, res) => {
 });
 
 router.get("/count", Auth, async (req, res) => {
-  const result = await Invoices.count({ isDeleted: !true });
+  const result = await Invoices.count({
+    isDeleted: !true
+  }).populate("createdBy");
   res.json(result);
 });
 
 router.get("/:id", Auth, async (req, res) => {
   const query = { inv_id: req.params.id, isDeleted: !true };
-  const result = await Invoices.find(query);
+  const result = await Invoices.find(query)
+    .populate("invtype")
+    .populate("createdBy");
   res.send(result);
 });
 
@@ -77,7 +83,8 @@ router.post("/", Auth, async (req, res) => {
     accountant_lock: req.body.accountant_lock,
     account_manager_lock: req.body.account_manager_lock,
     paid: req.body.paid,
-    items: req.body.items
+    items: req.body.items,
+    created_by: req.body.created_by
   });
   try {
     await invoice.save();

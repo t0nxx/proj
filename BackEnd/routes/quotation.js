@@ -5,7 +5,9 @@ const Quotation = require("../models/quotation");
 const Auth = require("../middlewars/auth");
 
 router.get("/", Auth, async (req, res) => {
-  const result = await Quotation.find({ isDeleted: !true });
+  const result = await Quotation.find({
+    isDeleted: !true
+  }).populate("createdBy");
   res.send(result);
 });
 
@@ -21,7 +23,7 @@ router.get("/count", Auth, async (req, res) => {
 
 router.get("/:id", Auth, async (req, res) => {
   const query = { quo_id: req.params.id, isDeleted: !true };
-  const result = await Quotation.find(query);
+  const result = await Quotation.find(query).populate("createdBy");
   res.send(result);
 });
 
@@ -38,7 +40,8 @@ router.post("/", Auth, async (req, res) => {
     po_number: req.body.po_number,
     total: req.body.total,
     status: req.body.status,
-    items: req.body.items
+    items: req.body.items,
+    created_by: req.body.created_by
   });
   try {
     await quotation.save();

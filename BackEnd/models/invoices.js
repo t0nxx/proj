@@ -21,6 +21,7 @@ const invoices_schema = new mongoose.Schema(
     total: Number,
     note: String,
     serial: String,
+    created_by: Number,
     accountant_lock: {
       type: Boolean,
       default: false
@@ -47,6 +48,13 @@ invoices_schema.virtual("invtype", {
   localField: "type_id",
   foreignField: "ptype_id",
   options: { select: { ptype_name: 1, _id: 0 } }
+});
+
+invoices_schema.virtual("createdBy", {
+  ref: "Users",
+  localField: "created_by",
+  foreignField: "user_id",
+  options: { select: { user_name: 1, _id: 0 } }
 });
 const Invoices = mongoose.model("Invoices", invoices_schema);
 invoices_schema.plugin(AutoIncrement, { inc_field: "inv_id" });
