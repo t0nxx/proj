@@ -84,7 +84,8 @@ router.post("/", Auth, async (req, res) => {
     account_manager_lock: req.body.account_manager_lock,
     paid: req.body.paid,
     items: req.body.items,
-    created_by: req.body.created_by
+    created_by: req.body.created_by,
+    profit: req.body.profit
   });
   try {
     await invoice.save();
@@ -98,8 +99,8 @@ router.post("/", Auth, async (req, res) => {
 
     //schedule job here ******************
     // job will start every 20 sec now
-    //the requirements is to be starts every week at production
-    // await schedule.scheduleJob("*/20 * * * * *", function() {
+    //the requirements is to be starts every month in production
+    // await schedule.scheduleJob("* * * * 1 *", function() {
     //   if (invoice.paid != true) {
     //     console.log("invoiced not paid");
     /// here i will set the mailler inshallah :D

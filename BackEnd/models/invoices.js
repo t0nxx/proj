@@ -22,6 +22,7 @@ const invoices_schema = new mongoose.Schema(
     note: String,
     serial: String,
     created_by: Number,
+    profit: Number,
     accountant_lock: {
       type: Boolean,
       default: false

@@ -11,7 +11,7 @@
 // const options = {
 //     from : 'your email here' ,
 //     to : 'email to send here',
-//     subject: 'test',
+//     subject: 'warning !! not paid invoice ',
 //     text: 'test for mailer '
 // }
 
@@ -20,4 +20,3 @@
 //     else console.log('mail sent succ' , res) ;
 // })
 // }
-
