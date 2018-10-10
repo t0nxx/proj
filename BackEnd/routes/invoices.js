@@ -39,6 +39,67 @@ router.get("/:id", Auth, async (req, res) => {
   res.send(result);
 });
 
+router.get("/type/:typeid", Auth, async (req, res) => {
+  const query = {
+    type_id: req.params.typeid,
+    status: "paid",
+    isDeleted: !true
+  };
+  const result = await Invoices.find(query);
+  res.send(result);
+});
+router.get("/client/:clientname", Auth, async (req, res) => {
+  const query = {
+    client_name: req.params.clientname,
+    status: "paid",
+    isDeleted: !true
+  };
+  const result = await Invoices.find(query);
+  res.send(result);
+});
+
+router.get("/company/:companyname", Auth, async (req, res) => {
+  const query = {
+    company_name: req.params.companyname,
+    status: "paid",
+    isDeleted: !true
+  };
+  const result = await Invoices.find(query);
+  res.send(result);
+});
+
+router.get("/total/:from/:to", Auth, async (req, res) => {
+  const from = req.params.from;
+  const to = req.params.to;
+  const query = {
+    date_to: { $gte: from, $lte: to },
+    status: "paid",
+    isDeleted: !true
+  };
+  const result = await Invoices.find(query);
+  let total = 0;
+  result.forEach(inv => {
+    total += inv.total;
+  });
+  res.json(total);
+});
+
+router.get("/totalprofit/:from/:to", Auth, async (req, res) => {
+  const from = req.params.from;
+  const to = req.params.to;
+  const query = {
+    date_to: { $gte: from, $lte: to },
+    status: "paid",
+    isDeleted: !true
+  };
+  const result = await Invoices.find(query);
+  let total = 0;
+  result.forEach(inv => {
+    total += inv.profit;
+  });
+  res.json(total);
+});
+
 router.get("/createpdf/:id", async (req, res) => {
   const query = { serial: req.params.id, isDeleted: !true };
   const result = await Invoices.find(query);
@@ -85,7 +146,8 @@ router.post("/", Auth, async (req, res) => {
     paid: req.body.paid,
     items: req.body.items,
     created_by: req.body.created_by,
-    profit: req.body.profit
+    profit: req.body.profit,
+    status: req.body.status
   });
   try {
     await invoice.save();
