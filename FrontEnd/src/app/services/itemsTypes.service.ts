@@ -1,4 +1,4 @@
-import { MainServices } from './main.services';
+import { MainServices } from './main.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({

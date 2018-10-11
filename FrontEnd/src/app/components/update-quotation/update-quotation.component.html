@@ -1,78 +1,78 @@
 <div class="col-xs-12">
   <div class="panel panel-primary">
-    <div class="panel-heading" *ngIf="state == 'Edit' && invoice">Edit Invoice</div>
-    <div class="panel-heading" *ngIf="state == 'Add'">Add Invoice</div>
+    <div class="panel-heading" *ngIf="state == 'Edit' && quotation">Edit Quotation</div>
+    <div class="panel-heading" *ngIf="state == 'Add'">Add Quotation</div>
     <div class="panel-body">
       <div class="row">
 
-        <div class="col-xs-12" *ngIf="state == 'Edit' && invoice">
+        <div class="col-xs-12" *ngIf="state == 'Edit' && quotation">
           <div class="row">
-            <div class="form-group col-sm-12">
-              <label for="serial">Invoice Serial</label>
-              <input autocomplete="no" name="serial" type="text" class="form-control" id="serial" [(ngModel)]="invoice.serial"
+            <!-- <div class="form-group col-sm-12">
+              <label for="serial">Quotation Serial</label>
+              <input autocomplete="no" name="serial" type="text" class="form-control" id="serial" [(ngModel)]="quotation.serial"
                 readonly>
-            </div>
-            <div class="form-group col-sm-6">
-              <label for="name">Invoice Name</label>
-              <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name"
+            </div> -->
+            <div class="form-group col-sm-12">
+              <label for="name">Quotation Name</label>
+              <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="quotation.name"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
-              <label for="type">Invoice Type</label>
-              <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
-                <option value="">-- Please Select --</option>
-                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
-              </select>
-            </div>
-            <div class="form-group col-sm-6">
               <label for="date_from">Date (From)</label>
-              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="invoice.date_from"
+              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="quotation.date_from"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
               <label for="date_to">Date (to)</label>
-              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="invoice.date_to"
+              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="quotation.date_to"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="type">Quotation Type</label>
+              <select name="type" class="form-control" id="type" [(ngModel)]="quotation.type_id" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
+                <option value="">-- Please Select --</option>
+                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
+              </select>
             </div>
             <!-- <div class="form-group col-sm-6">
             <label for="price">Price (L.E)</label>
-            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price"
+            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="quotation.price"
               [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
           </div> -->
-            <div class="form-group col-sm-6">
+            <!-- <div class="form-group col-sm-6">
               <label for="vat_percentage">Vat</label>
               <input autocomplete="no" name="vat_percentage" type="number" class="form-control" id="vat_percentage"
-                [(ngModel)]="invoice.vat_percentage" readonly>
-            </div>
+                [(ngModel)]="quotation.vat_percentage" readonly>
+            </div> -->
             <div class="form-group col-sm-6">
               <label for="company_name">Company Name</label>
               <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name"
-                [(ngModel)]="invoice.company_name" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
+                [(ngModel)]="quotation.company_name" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_name">Client Name</label>
-              <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name"
+              <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="quotation.client_name"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_title">Client Title</label>
               <input autocomplete="no" name="client_title" type="text" class="form-control" id="client_title"
-                [(ngModel)]="invoice.client_title" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
+                [(ngModel)]="quotation.client_title" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_phone">Client Phone</label>
               <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone"
-                [(ngModel)]="invoice.client_phone" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
+                [(ngModel)]="quotation.client_phone" [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
             <div class="form-group col-xs-6">
               <label for="po_number">Po Number</label>
-              <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number"
+              <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="quotation.po_number"
                 [disabled]="currentUserType !== 'admin' && currentUserType !== 'account manager'">
             </div>
-            <div class="form-group col-xs-12" *ngIf="invoice.items.length > 0">
+            <div class="form-group col-xs-12" *ngIf="quotation.items.length > 0">
               <label for="addItems">Add Items</label>
-              <span *ngFor="let addItem of invoice.items" class="addedItemBlock">
-                <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromInvoice(addItem)"></i>
+              <span *ngFor="let addItem of quotation.items" class="addedItemBlock">
+                <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromQuotation(addItem)"></i>
                 <!-- <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_id" placeholder="Item ID"
                   readonly> -->
                 <div class="form-group col-sm-6">
@@ -119,31 +119,31 @@
             </div>
             <div class="form-group col-xs-12">
               <label for="items">Items</label>
-              <select name="items" class="form-control" id="items" (change)="addNewItemToInvoice(itemId)" [(ngModel)]="itemId"
+              <select name="items" class="form-control" id="items" (change)="addNewItemToQuotation(itemId)" [(ngModel)]="itemId"
                 [disabled]="currentUserType !== 'admin'">
                 <option value="">-- Please Select --</option>
                 <option *ngFor="let item of items" value="{{item.item_id}}">{{item.item_name}}</option>
               </select>
             </div>
-            <div class="form-group col-xs-6">
+            <!-- <div class="form-group col-xs-6">
               <label for="sub_total">Sub Total</label>
-              <input name="sub_total" type="number" class="form-control" id="sub_total" [(ngModel)]="invoice.sub_total"
+              <input name="sub_total" type="number" class="form-control" id="sub_total" [(ngModel)]="quotation.sub_total"
                 readonly>
-            </div>
+            </div> -->
             <div class="form-group col-xs-6">
               <label for="total">Total</label>
-              <input name="total" type="number" class="form-control" id="total" [(ngModel)]="invoice.total" readonly>
+              <input name="total" type="number" class="form-control" id="total" [(ngModel)]="quotation.total" readonly>
             </div>
             <div class="form-group col-xs-6">
               <label for="paid">Paid</label>
-              <input name="paid" type="checkbox" class="form-control" id="paid" [(ngModel)]="invoice.paid">
+              <input name="paid" type="checkbox" class="form-control" id="paid" [(ngModel)]="quotation.paid">
             </div>
-            <div class="form-group col-xs-6">
+            <div class="form-group col-xs-12">
               <label for="note">Note</label>
-              <textarea name="note" id="note" class="form-control" id="note" [(ngModel)]="invoice.note"></textarea>
+              <textarea name="note" id="note" class="form-control" id="note" [(ngModel)]="quotation.note"></textarea>
             </div>
             <div class="col-xs-12">
-              <button type="submit" class="btn btn-default" (click)="editInvoice(invoice)">Edit</button>
+              <button type="submit" class="btn btn-default" (click)="editQuotation(quotation)">Edit</button>
             </div>
           </div>
         </div>
@@ -151,67 +151,67 @@
 
         <div class="col-xs-12" *ngIf="state == 'Add'">
           <div class="row">
-            <div class="form-group col-sm-6">
-              <label for="name">Invoice Name</label>
-              <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="invoice.name"
+            <div class="form-group col-sm-12">
+              <label for="name">Quotation Name</label>
+              <input autocomplete="no" name="name" type="text" class="form-control" id="name" [(ngModel)]="quotation.name"
                 [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
-              <label for="type">Invoice Type</label>
-              <select name="type" class="form-control" id="type" [(ngModel)]="invoice.type_id" [disabled]="currentUserType !== 'admin'">
-                <option value="">-- Please Select --</option>
-                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
-              </select>
-            </div>
-            <div class="form-group col-sm-6">
               <label for="date_from">Date (From)</label>
-              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="invoice.date_from"
+              <input autocomplete="no" name="date_from" type="date" class="form-control" id="date_from" [(ngModel)]="quotation.date_from"
                 [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
               <label for="date_to">Date (to)</label>
-              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="invoice.date_to"
+              <input autocomplete="no" name="date_to" type="date" class="form-control" id="date_to" [(ngModel)]="quotation.date_to"
                 [disabled]="currentUserType !== 'admin'">
+            </div>
+            <div class="form-group col-sm-6">
+              <label for="type">Quotation Type</label>
+              <select name="type" class="form-control" id="type" [(ngModel)]="quotation.type_id" [disabled]="currentUserType !== 'admin'">
+                <option value="">-- Please Select --</option>
+                <option *ngFor="let type of types" value="{{type.ptype_id}}">{{type.ptype_name}}</option>
+              </select>
             </div>
             <!-- <div class="form-group col-sm-6">
             <label for="price">Price (L.E)</label>
-            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="invoice.price"
+            <input autocomplete="no" name="price" type="number" class="form-control" id="price" [(ngModel)]="quotation.price"
               [disabled]="currentUserType !== 'admin'">
           </div> -->
-            <div class="form-group col-sm-6">
+            <!-- <div class="form-group col-sm-6">
               <label for="vat_percentage">Vat</label>
               <input autocomplete="no" name="vat_percentage" type="number" class="form-control" id="vat_percentage"
-                [(ngModel)]="invoice.vat_percentage" readonly>
-            </div>
+                [(ngModel)]="quotation.vat_percentage" readonly>
+            </div> -->
             <div class="form-group col-sm-6">
               <label for="company_name">Company Name</label>
               <input autocomplete="no" name="company_name" type="text" class="form-control" id="company_name"
-                [(ngModel)]="invoice.company_name" [disabled]="currentUserType !== 'admin'">
+                [(ngModel)]="quotation.company_name" [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_name">Client Name</label>
-              <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="invoice.client_name"
+              <input autocomplete="no" name="client_name" type="text" class="form-control" id="client_name" [(ngModel)]="quotation.client_name"
                 [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_title">Client Title</label>
               <input autocomplete="no" name="client_title" type="text" class="form-control" id="client_title"
-                [(ngModel)]="invoice.client_title" [disabled]="currentUserType !== 'admin'">
+                [(ngModel)]="quotation.client_title" [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
               <label for="client_phone">Client Phone</label>
               <input autocomplete="no" name="client_phone" type="number" class="form-control" id="client_phone"
-                [(ngModel)]="invoice.client_phone" [disabled]="currentUserType !== 'admin'">
+                [(ngModel)]="quotation.client_phone" [disabled]="currentUserType !== 'admin'">
             </div>
             <div class="form-group col-sm-6">
               <label for="po_number">Po Number</label>
-              <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="invoice.po_number"
+              <input autocomplete="no" name="po_number" type="number" class="form-control" id="po_number" [(ngModel)]="quotation.po_number"
                 [disabled]="currentUserType !== 'admin'">
             </div>
-            <div class="form-group col-sm-12" *ngIf="invoice.items.length > 0">
+            <div class="form-group col-sm-12" *ngIf="quotation.items.length > 0">
               <label for="addItems">Add Items</label>
-              <span *ngFor="let addItem of invoice.items" class="addedItemBlock">
-                <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromInvoice(addItem)"></i>
+              <span *ngFor="let addItem of quotation.items" class="addedItemBlock">
+                <i class="fa fa-times" aria-hidden="true" (click)="removeItemFromQuotation(addItem)"></i>
                 <!-- <input type="text" class="form-control col-xs-12" [(ngModel)]="addItem.item_id" placeholder="Item ID" readonly> -->
                 <div class="form-group col-sm-6">
                   <label for="items">Name</label>
@@ -257,26 +257,26 @@
             </div>
             <div class="form-group col-sm-12">
               <label for="items">Items</label>
-              <select name="items" class="form-control" id="items" (change)="addNewItemToInvoice(itemId)" [(ngModel)]="itemId">
+              <select name="items" class="form-control" id="items" (change)="addNewItemToQuotation(itemId)" [(ngModel)]="itemId">
                 <option value="">-- Please Select --</option>
                 <option *ngFor="let item of items" value="{{item.item_id}}">{{item.item_name}}</option>
               </select>
             </div>
-            <div class="col-xs-6">
+            <!-- <div class="col-xs-6">
               <div class="form-group">
                 <label for="sub_total">Sub Total</label>
-                <input name="sub_total" type="number" class="form-control" id="sub_total" [(ngModel)]="invoice.sub_total"
+                <input name="sub_total" type="number" class="form-control" id="sub_total" [(ngModel)]="quotation.sub_total"
                   readonly>
               </div>
-            </div>
-            <div class="col-xs-6">
+            </div> -->
+            <div class="col-xs-12">
               <div class="form-group">
                 <label for="total">Total</label>
-                <input name="total" type="number" class="form-control" id="total" [(ngModel)]="invoice.total" readonly>
+                <input name="total" type="number" class="form-control" id="total" [(ngModel)]="quotation.total" readonly>
               </div>
             </div>
             <div class="col-xs-12">
-              <button type="submit" class="btn btn-default" (click)="addNewInvoice(invoice)">Add</button>
+              <button type="submit" class="btn btn-default" (click)="addNewQuotation(quotation)">Add</button>
             </div>
           </div>
         </div>

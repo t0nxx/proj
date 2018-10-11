@@ -1,6 +1,6 @@
-import { ItemsTypesServices } from './../../services/itemsTypes.services';
+import { ItemsTypesServices } from './../../services/itemsTypes.service';
 import { Component } from '@angular/core';
-import { NotificationsServices } from '../../services/notifications.services';
+import { NotificationsServices } from '../../services/notifications.service';
 
 @Component({
     selector: 'types',

@@ -1,5 +1,5 @@
-import { NotificationsServices } from './../../services/notifications.services';
-import { MainServices } from './../../services/main.services';
+import { NotificationsServices } from './../../services/notifications.service';
+import { MainServices } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 

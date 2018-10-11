@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationsServices } from './../../services/notifications.services';
-import { HomeServices } from '../../services/home.services';
-import { PermissionsServices } from '../../services/permissions.services';
+import { NotificationsServices } from './../../services/notifications.service';
+import { HomeServices } from '../../services/home.service';
+import { PermissionsServices } from '../../services/permissions.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   username = this.user.getCurrentUserName();
   numberOfItems;
-  numberOfInvoices;
+  numberOfQuotations;
 
   constructor(
     private mess: NotificationsServices,
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     private user: PermissionsServices
   ) {
     this.getNumItems();
-    this.getNumInvoices();
+    this.getNumQuotations();
   }
 
   getNumItems(){
@@ -31,10 +31,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getNumInvoices(){
-    this.home.getNumberOfInvoices().subscribe(data => {
-      this.numberOfInvoices = data;
-      // console.log(this.numberOfInvoices)
+  getNumQuotations(){
+    this.home.getNumberOfQuotations().subscribe(data => {
+      this.numberOfQuotations = data;
+      // console.log(this.numberOfQuotations)
     });
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { MainServices } from '../../services/main.services';
+import { MainServices } from '../../services/main.service';
 import { Message } from 'primeng/components/common/api';
-import { NotificationsServices } from './../../services/notifications.services';
+import { NotificationsServices } from './../../services/notifications.service';
 
 @Component({
   selector: 'app-users-types',

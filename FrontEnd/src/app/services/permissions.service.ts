@@ -1,4 +1,4 @@
-import { MainServices } from './main.services';
+import { MainServices } from './main.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,6 +8,7 @@ export class PermissionsServices {
 
     currentUserType: string;
     currentUserName: string;
+    currentUserId: number;
 
     constructor(
         private main: MainServices
@@ -26,6 +27,13 @@ export class PermissionsServices {
         if (localStorage.getItem("currentUser")) {
             this.currentUserName = JSON.parse(localStorage.getItem("currentUser")).name;
             return this.currentUserName;
+        }
+    }
+
+    getCurrentUserId(){
+        if (localStorage.getItem("currentUser")) {
+            this.currentUserId = JSON.parse(localStorage.getItem("currentUser")).utype_id;
+            return this.currentUserId;
         }
     }
 

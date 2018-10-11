@@ -1,4 +1,4 @@
-import { MainServices } from './main.services';
+import { MainServices } from './main.service';
 import { Items } from './../interfaces/items';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

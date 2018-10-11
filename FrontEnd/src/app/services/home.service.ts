@@ -1,4 +1,4 @@
-import { MainServices } from './main.services';
+import { MainServices } from './main.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -17,8 +17,8 @@ export class HomeServices {
         return this.main.getRequest('items/count');
     }
 
-    getNumberOfInvoices(){
-        return this.main.getRequest('invoices/count');
+    getNumberOfQuotations(){
+        return this.main.getRequest('quotations/count');
     }
 
 }
