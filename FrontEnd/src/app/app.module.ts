@@ -1,8 +1,8 @@
-import { PermissionsServices } from './services/permissions.services';
-import { ItemsTypesServices } from './services/itemsTypes.services';
-import { MainServices } from './services/main.services';
+import { PermissionsServices } from './services/permissions.service';
+import { ItemsTypesServices } from './services/itemsTypes.service';
+import { MainServices } from './services/main.service';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { AuthGuard } from './services/auth.services';
+import { AuthGuard } from './services/auth.service';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -38,11 +38,13 @@ import { AddItemComponent } from './components/add-item/add-item.component';
 import { AddItemsTypeComponent } from './components/add-items-type/add-items-type.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotificationsComponent } from './components/notifications/notifications.component';
-import { NotificationsServices } from './services/notifications.services';
-import { UpdateInvoiceComponent } from './components/update-invoice/update-invoice.component';
-import { InvoicesServices } from './services/invoices.services';
+import { NotificationsServices } from './services/notifications.service';
+import { UpdateQuotationComponent } from './components/update-quotation/update-quotation.component';
+import { QuotationsServices } from './services/quotations.service';
+import { QuotationsComponent } from './components/quotations/quotations.component';
+import { HomeServices } from './services/home.service';
 import { InvoicesComponent } from './components/invoices/invoices.component';
-import { HomeServices } from './services/home.services';
+import { InvoicesServices } from './services/invoices.service';
 
 
 @NgModule({
@@ -61,7 +63,8 @@ import { HomeServices } from './services/home.services';
     AddItemsTypeComponent,
     HomeComponent,
     NotificationsComponent,
-    UpdateInvoiceComponent,
+    UpdateQuotationComponent,
+    QuotationsComponent,
     InvoicesComponent
   ],
   imports: [
@@ -87,9 +90,9 @@ import { HomeServices } from './services/home.services';
       { path: "itemsTypes", component: TypesComponent, canActivate: [AuthGuard]},
       { path: "addItemsType", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
       { path: "updateItemsType/:id", component: AddItemsTypeComponent, canActivate: [AuthGuard]},
-      { path: "addInvoice", component: UpdateInvoiceComponent, canActivate: [AuthGuard]},
-      { path: "updateInvoice/:id", component: UpdateInvoiceComponent, canActivate: [AuthGuard]},
-      { path: "invoices", component: InvoicesComponent, canActivate: [AuthGuard]}
+      { path: "addQuotation", component: UpdateQuotationComponent, canActivate: [AuthGuard]},
+      { path: "updateQuotation/:id", component: UpdateQuotationComponent, canActivate: [AuthGuard]},
+      { path: "quotations", component: QuotationsComponent, canActivate: [AuthGuard]}
     ]),
     HttpModule,
     HttpClientModule,
@@ -103,9 +106,10 @@ import { HomeServices } from './services/home.services';
     NotificationsServices,
     MainServices,
     ItemsTypesServices,
-    InvoicesServices,
+    QuotationsServices,
     PermissionsServices,
-    HomeServices
+    HomeServices,
+    InvoicesServices
   ],
   bootstrap: [AppComponent]
 })

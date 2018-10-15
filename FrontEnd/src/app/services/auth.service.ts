@@ -1,4 +1,4 @@
-import { PermissionsServices } from "./permissions.services";
+import { PermissionsServices } from "./permissions.service";
 import { Injectable } from "@angular/core";
 import {
   Router,
@@ -18,11 +18,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     if (localStorage.getItem("currentUser")) {
-      this.router.events.subscribe(res => {
-        if(this.currentUserType === "Accountant" && res.url !== "/addInvoice"){
-          return false;
-        }
-      });
+      // this.router.events.subscribe(res => {
+      //   if(this.currentUserType === "Accountant" && res.url !== "/addQuotation"){
+      //     return false;
+      //   }
+      // });
       return true;
     }
     // not logged in so redirect to login page with the return url

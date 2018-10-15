@@ -1,7 +1,7 @@
-import { PermissionsServices } from "./../../services/permissions.services";
+import { PermissionsServices } from "./../../services/permissions.service";
 import { Component, OnInit } from "@angular/core";
-import { NotificationsServices } from "./../../services/notifications.services";
-import { InvoicesServices } from "../../services/invoices.services";
+import { NotificationsServices } from "./../../services/notifications.service";
+import { InvoicesServices } from "../../services/invoices.service";
 
 @Component({
   selector: "app-invoices",

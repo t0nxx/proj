@@ -1,19 +1,19 @@
-import { PermissionsServices } from './../../services/permissions.services';
-import { NotificationsServices } from './../../services/notifications.services';
+import { PermissionsServices } from './../../services/permissions.service';
+import { NotificationsServices } from './../../services/notifications.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InvoicesServices } from '../../services/invoices.services';
-import { ItemsTypesServices } from '../../services/itemsTypes.services';
-import { ItemsServices } from '../../services/items.services';
+import { QuotationsServices } from '../../services/quotations.service';
+import { ItemsTypesServices } from '../../services/itemsTypes.service';
+import { ItemsServices } from '../../services/items.service';
 
 @Component({
-  selector: 'app-update-invoice',
-  templateUrl: './update-invoice.component.html',
-  styleUrls: ['./update-invoice.component.css']
+  selector: 'app-update-quotation',
+  templateUrl: './update-quotation.component.html',
+  styleUrls: ['./update-quotation.component.css']
 })
-export class UpdateInvoiceComponent implements OnInit {
+export class UpdateQuotationComponent implements OnInit {
 
-  invoice;
+  quotation;
   items;
   types;
   id;
@@ -21,12 +21,13 @@ export class UpdateInvoiceComponent implements OnInit {
   addItems = [];
   itemId = "";
   currentUserType = this.permissionsServices.getCurrentUserType();
+  currentUserId = this.permissionsServices.getCurrentUserId();
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private mess: NotificationsServices,
-    private invoiceServices: InvoicesServices,
+    private quotationServices: QuotationsServices,
     private typesServices: ItemsTypesServices,
     private itemsServices: ItemsServices,
     private permissionsServices: PermissionsServices
@@ -44,7 +45,7 @@ export class UpdateInvoiceComponent implements OnInit {
           this.router.navigateByUrl('/');
         }
         this.state = "Add";
-        this.invoice = {
+        this.quotation = {
           items: [],
           name: "",
           type_id: "",
@@ -67,32 +68,33 @@ export class UpdateInvoiceComponent implements OnInit {
   }
 
   getIvoiceData(id) {
-    this.invoiceServices.getInvoice(id).subscribe(data => {
-      this.invoice = data[0];
+    this.quotationServices.getQuotation(id).subscribe(data => {
+      this.quotation = data[0];
     })
   }
 
-  editInvoice(invoice) {
+  editQuotation(quotation) {
     if (this.currentUserType === 'account manager') {
-      invoice.account_manager_lock = true;
+      quotation.account_manager_lock = true;
     }
-    this.invoiceServices.editInvoice(this.id, invoice).subscribe(res => {
-      this.mess.showMessage("Success", "Edit invoice Done", "success");
+    this.quotationServices.editQuotation(this.id, quotation).subscribe(res => {
+      this.mess.showMessage("Success", "Edit quotation Done", "success");
     })
   }
 
-  addNewInvoice(invoice) {
-    // console.log(invoice)
-    if (this.currentUserType === 'accountant') {
-      invoice.accountant_lock = true;
-      invoice.account_manager_lock = false;
-    }else {
-      invoice.accountant_lock = false;
-      invoice.account_manager_lock = false;
-    }
-    this.invoiceServices.addNewInvoice(invoice).subscribe(res => {
-      console.log(res)
-      // this.invoice = {
+  addNewQuotation(quotation) {
+    // console.log(quotation)
+    // if (this.currentUserType === 'accountant') {
+    //   quotation.accountant_lock = true;
+    //   quotation.account_manager_lock = false;
+    // }else {
+    //   quotation.accountant_lock = false;
+    //   quotation.account_manager_lock = false;
+    // }
+    quotation.user_id = this.currentUserId;
+    this.quotationServices.addNewQuotation(quotation).subscribe(res => {
+      // console.log(res)
+      // this.quotation = {
       //   items: [],
       //   name: "",
       //   type_id: "",
@@ -107,7 +109,7 @@ export class UpdateInvoiceComponent implements OnInit {
       //   accountant_lock: "",
       //   account_manager_lock: ""
       // }
-      this.mess.showMessage("Success", "Add invoice Done", "success");
+      this.mess.showMessage("Success", "Add quotation Done", "success");
     }, error => {
       console.log(error)
     });
@@ -125,12 +127,12 @@ export class UpdateInvoiceComponent implements OnInit {
     })
   }
 
-  addNewItemToInvoice(itemID) {
+  addNewItemToQuotation(itemID) {
     let items = this.items;
     for (let index = 0; index < items.length; index++) {
       if (items[index].item_id == itemID) {
         let item = items[index];
-        this.invoice.items.push({
+        this.quotation.items.push({
           item_id: item.item_id,
           item_price: "",
           item_quantity: "",
@@ -146,8 +148,8 @@ export class UpdateInvoiceComponent implements OnInit {
     this.itemId = "";
   }
 
-  removeItemFromInvoice(item) {
-    let items = this.invoice.items;
+  removeItemFromQuotation(item) {
+    let items = this.quotation.items;
     for (let index = 0; index < items.length; index++) {
       let oneitem = items[index];
       if (oneitem.item_id === item.item_id) {
@@ -162,14 +164,14 @@ export class UpdateInvoiceComponent implements OnInit {
     // sum total cost
     item.item_totalcost = item.item_cost * item.item_quantity;
     // sum sub total && total
-    let items = this.invoice.items;
-    this.invoice.sub_total = 0;
-    this.invoice.total = 0;
+    let items = this.quotation.items;
+    this.quotation.sub_total = 0;
+    this.quotation.total = 0;
     for (let index = 0; index < items.length; index++) {
-      this.invoice.sub_total += items[index].item_totalprice;
+      this.quotation.sub_total += items[index].item_totalprice;
     }
-    let vatAmoutn = ((this.invoice.sub_total * this.invoice.vat_percentage) / 100);
-    this.invoice.total += this.invoice.sub_total - vatAmoutn;
+    let vatAmoutn = ((this.quotation.sub_total * this.quotation.vat_percentage) / 100);
+    this.quotation.total += this.quotation.sub_total - vatAmoutn;
   }
 
 

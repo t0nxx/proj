@@ -1,4 +1,4 @@
-import { PermissionsServices } from './../../services/permissions.services';
+import { PermissionsServices } from './../../services/permissions.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 

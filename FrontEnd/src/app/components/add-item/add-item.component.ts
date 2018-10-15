@@ -1,7 +1,7 @@
-import { ItemsTypesServices } from './../../services/itemsTypes.services';
+import { ItemsTypesServices } from './../../services/itemsTypes.service';
 import { Message } from 'primeng/components/common/api';
-import { NotificationsServices } from './../../services/notifications.services';
-import { MainServices } from './../../services/main.services';
+import { NotificationsServices } from './../../services/notifications.service';
+import { MainServices } from './../../services/main.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
