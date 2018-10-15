@@ -7,7 +7,7 @@ const Auth = require("../middlewars/auth");
 router.get("/", Auth, async (req, res) => {
   const result = await Quotation.find({
     isDeleted: !true
-  }).populate("createdBy");
+  }).populate("createdBy").populate('quotype');
   res.send(result);
 });
 
@@ -17,13 +17,22 @@ router.get("/deletedquotation", Auth, async (req, res) => {
 });
 
 router.get("/count", Auth, async (req, res) => {
-  const result = await Quotation.count({ isDeleted: !true });
+  const result = await Quotation.count({ isDeleted: !true }).populate("createdBy").populate('quotype');
   res.json(result);
 });
 
 router.get("/:id", Auth, async (req, res) => {
   const query = { quo_id: req.params.id, isDeleted: !true };
-  const result = await Quotation.find(query).populate("createdBy");
+  const result = await Quotation.find(query).populate("createdBy").populate('quotype');
+  res.send(result);
+});
+
+router.get("/client/:clientname", Auth, async (req, res) => {
+  const query = {
+    client_name: req.params.clientname,
+    isDeleted: !true
+  };
+  const result = await Quotation.find(query);
   res.send(result);
 });
 

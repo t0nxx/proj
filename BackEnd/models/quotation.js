@@ -35,6 +35,13 @@ quotation_schema.virtual("createdBy", {
   foreignField: "user_id",
   options: { select: { user_name: 1, _id: 0 } }
 });
+
+quotation_schema.virtual("quotype", {
+  ref: "Products_types",
+  localField: "type_id",
+  foreignField: "ptype_id",
+  options: { select: { ptype_name: 1, _id: 0 } }
+});
 const Quotation = mongoose.model("Quotation", quotation_schema);
 quotation_schema.plugin(AutoIncrement, { inc_field: "quo_id" });
 

@@ -141,8 +141,6 @@ router.post("/", Auth, async (req, res) => {
     sub_total: req.body.sub_total,
     total: req.body.total,
     note: req.body.note,
-    accountant_lock: req.body.accountant_lock,
-    account_manager_lock: req.body.account_manager_lock,
     paid: req.body.paid,
     items: req.body.items,
     created_by: req.body.created_by,

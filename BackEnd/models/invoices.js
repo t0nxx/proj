@@ -25,15 +25,7 @@ const invoices_schema = new mongoose.Schema(
     profit: Number,
     status: {
       type: String,
-      default: "25"
-    },
-    accountant_lock: {
-      type: Boolean,
-      default: false
-    },
-    account_manager_lock: {
-      type: Boolean,
-      default: false
+      default: ""
     },
     paid: {
       type: Boolean,

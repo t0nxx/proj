@@ -34,4 +34,5 @@ app.use("/quotations", Quotations);
 app.use("/auth", AuthRoute);
 app.use("/login", LoginRoute);
 
-app.listen(3000, () => console.log("running"));
+const port = process.env.PORT || 3000 ;
+app.listen(port, () => console.log(`running on port ${port}`));
